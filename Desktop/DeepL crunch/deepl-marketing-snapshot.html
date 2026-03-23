@@ -1010,5 +1010,67 @@
 
 </div>
 
+<script>
+// ============================================================
+// RADAR CHART
+// ============================================================
+(function () {
+  const ctx = document.getElementById('radarChart').getContext('2d');
+
+  const labels = ['Search', 'Content', 'Brand', 'AI Discovery', 'Reputation', 'Social'];
+  const scores = [8, 2, 4, 5, 5, 4];
+
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels,
+      datasets: [{
+        data: scores,
+        backgroundColor: 'rgba(96,165,250,0.10)',
+        borderColor: '#60A5FA',
+        borderWidth: 2,
+        pointBackgroundColor: '#60A5FA',
+        pointBorderColor: 'transparent',
+        pointRadius: 4,
+        pointHoverRadius: 6,
+      }]
+    },
+    options: {
+      animation: {
+        duration: 1000,
+        easing: 'easeInOutQuart',
+      },
+      scales: {
+        r: {
+          min: 0,
+          max: 10,
+          ticks: {
+            stepSize: 2,
+            display: false,
+          },
+          grid: {
+            color: '#252A36',
+          },
+          angleLines: {
+            color: '#252A36',
+          },
+          pointLabels: {
+            color: '#8B8F9C',
+            font: {
+              family: "'DM Sans', sans-serif",
+              size: 12,
+            },
+          },
+        },
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: { enabled: false },
+      },
+    },
+  });
+})();
+</script>
+
 </body>
 </html>
