@@ -497,6 +497,62 @@
   .callout p strong {
     color: var(--text);
   }
+
+  /* ============================================================
+     SCROLL ANIMATIONS
+     ============================================================ */
+
+  /* Base state — invisible until JS triggers */
+  .anim-fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+
+  .anim-fade-left {
+    opacity: 0;
+    transform: translateX(-16px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+
+  /* Visible state added by JS */
+  .anim-fade-up.is-visible,
+  .anim-fade-left.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Stagger delays for child elements */
+  .anim-stagger > *:nth-child(1) { transition-delay: 0ms; }
+  .anim-stagger > *:nth-child(2) { transition-delay: 60ms; }
+  .anim-stagger > *:nth-child(3) { transition-delay: 120ms; }
+  .anim-stagger > *:nth-child(4) { transition-delay: 180ms; }
+  .anim-stagger > *:nth-child(5) { transition-delay: 240ms; }
+  .anim-stagger > *:nth-child(6) { transition-delay: 300ms; }
+
+  /* Bar fill animation — JS sets --bar-target and triggers .bar-animate */
+  .bar-fill {
+    width: 0 !important;
+    transition: width 0.7s ease-out;
+  }
+
+  .bar-fill.bar-animate {
+    width: var(--bar-target) !important;
+  }
+
+  /* Reduced motion — skip all transitions */
+  @media (prefers-reduced-motion: reduce) {
+    .anim-fade-up,
+    .anim-fade-left {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .bar-fill {
+      width: var(--bar-target) !important;
+      transition: none;
+    }
+  }
 </style>
 </head>
 <body>
