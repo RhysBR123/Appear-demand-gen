@@ -637,17 +637,17 @@
       </div>
       <div class="data-cell anim-fade-up">
         <div class="cell-label">Organic Traffic</div>
-        <div class="cell-value blue">11.5M</div>
+        <div class="cell-value blue" data-count="11.5" data-suffix="M">11.5M</div>
         <div class="cell-note">vs Reverso: 4.9M (2.3× less)</div>
       </div>
       <div class="data-cell anim-fade-up">
         <div class="cell-label">Backlinks</div>
-        <div class="cell-value blue">8.0M</div>
+        <div class="cell-value blue" data-count="8.0" data-suffix="M">8.0M</div>
         <div class="cell-note">From 59,492 unique referring domains</div>
       </div>
       <div class="data-cell anim-fade-up">
         <div class="cell-label">Paid Spend</div>
-        <div class="cell-value red">$13</div>
+        <div class="cell-value red" data-count="13" data-prefix="$">$13</div>
         <div class="cell-note">7 keywords, 6 visits total</div>
       </div>
     </div>
@@ -854,17 +854,17 @@
     <div class="data-grid anim-stagger">
       <div class="data-cell anim-fade-up">
         <div class="cell-label">Google AI Overviews</div>
-        <div class="cell-value amber">29.8K</div>
+        <div class="cell-value amber" data-count="29.8" data-suffix="K">29.8K</div>
         <div class="cell-note">Mentions in AI Overview panels</div>
       </div>
       <div class="data-cell anim-fade-up">
         <div class="cell-label">Google AI Mode</div>
-        <div class="cell-value amber">20K</div>
+        <div class="cell-value amber" data-count="20" data-suffix="K">20K</div>
         <div class="cell-note">~0% referral traffic from AI Mode</div>
       </div>
       <div class="data-cell anim-fade-up">
         <div class="cell-label">Gemini</div>
-        <div class="cell-value amber">17.6K</div>
+        <div class="cell-value amber" data-count="17.6" data-suffix="K">17.6K</div>
         <div class="cell-note">Only 474 cited pages</div>
       </div>
       <div class="data-cell anim-fade-up">
@@ -900,31 +900,31 @@
     <div class="review-grid anim-stagger">
       <div class="review-card anim-fade-up">
         <div class="platform">G2</div>
-        <div class="score green">4.6</div>
+        <div class="score green" data-count="4.6">4.6</div>
         <div class="review-count">~158 reviews</div>
         <div class="review-note">Auto-detect and real-time speed praised</div>
       </div>
       <div class="review-card anim-fade-up">
         <div class="platform">Capterra</div>
-        <div class="score green">4.7</div>
+        <div class="score green" data-count="4.7">4.7</div>
         <div class="review-count">~154 reviews</div>
         <div class="review-note">Human-sounding output, DeepL Write highlighted</div>
       </div>
       <div class="review-card anim-fade-up">
         <div class="platform">Gartner</div>
-        <div class="score green">4.7</div>
+        <div class="score green" data-count="4.7">4.7</div>
         <div class="review-count">~50+ reviews</div>
         <div class="review-note">Enterprise teams cite workflow efficiency</div>
       </div>
       <div class="review-card anim-fade-up">
         <div class="platform">App Store</div>
-        <div class="score green">4.8</div>
+        <div class="score green" data-count="4.8">4.8</div>
         <div class="review-count">~175 reviews</div>
         <div class="review-note">Mobility praised; Romaji requested</div>
       </div>
       <div class="review-card anim-fade-up">
         <div class="platform">Trustpilot</div>
-        <div class="score red">1.8</div>
+        <div class="score red" data-count="1.8">1.8</div>
         <div class="review-count">~662 reviews</div>
         <div class="review-note">Support gaps and billing complaints dominate</div>
       </div>
@@ -1028,11 +1028,11 @@
     <div class="data-grid anim-stagger">
       <div class="data-cell anim-fade-up">
         <div class="cell-label">Videos Published</div>
-        <div class="cell-value blue">102</div>
+        <div class="cell-value blue" data-count="102">102</div>
       </div>
       <div class="data-cell anim-fade-up">
         <div class="cell-label">Subscribers</div>
-        <div class="cell-value amber">2.25K</div>
+        <div class="cell-value amber" data-count="2.25" data-suffix="K">2.25K</div>
       </div>
       <div class="data-cell anim-fade-up">
         <div class="cell-label">Top Video Views</div>
@@ -1041,7 +1041,7 @@
       </div>
       <div class="data-cell anim-fade-up">
         <div class="cell-label">Content Pillars</div>
-        <div class="cell-value blue">4</div>
+        <div class="cell-value blue" data-count="4">4</div>
         <div class="cell-note">Tutorials, Enterprise, Thought Leadership, Dev</div>
       </div>
     </div>
@@ -1174,6 +1174,48 @@
   }, { threshold: 0.3 });
 
   bars.forEach(bar => observer.observe(bar));
+})();
+
+// ============================================================
+// COUNT-UP ANIMATION
+// ============================================================
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  function animateCount(el) {
+    const target = parseFloat(el.dataset.count);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 800;
+    const isDecimal = String(target).includes('.');
+    const decimals = isDecimal ? (String(target).split('.')[1] || '').length : 0;
+
+    const start = performance.now();
+
+    function tick(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // easeOutCubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = target * eased;
+      el.textContent = prefix + current.toFixed(decimals) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  // Observe all elements with data-count attribute
+  document.querySelectorAll('[data-count]').forEach(el => observer.observe(el));
 })();
 </script>
 
