@@ -572,39 +572,39 @@
     <h2>At a Glance</h2>
     <div class="glance-layout">
       <!-- LEFT: Radar chart -->
-      <div class="radar-wrap">
+      <div class="radar-wrap anim-fade-up">
         <div class="radar-title">Marketing Function Score</div>
         <canvas id="radarChart" width="400" height="400"></canvas>
       </div>
 
       <!-- RIGHT: Metric cards -->
-      <div class="radar-cards">
-        <div class="summary-card">
+      <div class="radar-cards anim-stagger">
+        <div class="summary-card anim-fade-up">
           <div class="metric-label">Domain Authority</div>
           <div class="metric-value green" data-count="98" data-suffix=" / 100">98 / 100</div>
           <div class="metric-context">Only google.com sits higher. Extraordinary for a single-product company.</div>
         </div>
-        <div class="summary-card">
+        <div class="summary-card anim-fade-up">
           <div class="metric-label">Organic Traffic Value</div>
           <div class="metric-value green" data-count="9.06" data-prefix="$" data-suffix="M">$9.06M</div>
           <div class="metric-context">Equivalent paid cost of organic traffic — achieved on near-zero ad spend.</div>
         </div>
-        <div class="summary-card">
+        <div class="summary-card anim-fade-up">
           <div class="metric-label">Traffic Concentration</div>
           <div class="metric-value red" data-count="67.1" data-suffix="%">67.1%</div>
           <div class="metric-context">Share of organic traffic flowing to /translator pages alone. No blog or content page ranks in the top 100.</div>
         </div>
-        <div class="summary-card">
+        <div class="summary-card anim-fade-up">
           <div class="metric-label">Paid Search Keywords</div>
           <div class="metric-value red" data-count="7">7</div>
           <div class="metric-context">Total paid keywords. $13 in spend. No safety net if organic positions shift.</div>
         </div>
-        <div class="summary-card">
+        <div class="summary-card anim-fade-up">
           <div class="metric-label">AI Mentions</div>
           <div class="metric-value amber" data-count="76.6" data-suffix="K">76.6K</div>
           <div class="metric-context">Across Google AI Overviews, AI Mode, and Gemini — but converting to ~0% referral traffic.</div>
         </div>
-        <div class="summary-card">
+        <div class="summary-card anim-fade-up">
           <div class="metric-label">Keyword Trajectory</div>
           <div class="metric-value red" data-count="10" data-prefix="−" data-suffix="%">−10%</div>
           <div class="metric-context">Decline in organic keyword count, with a −3.3% drop in traffic. Heading the wrong direction pre-IPO.</div>
@@ -617,7 +617,7 @@
   <!-- PILLAR 1: SEARCH PERFORMANCE -->
   <!-- ============================================================ -->
   <section class="pillar">
-    <div class="pillar-header">
+    <div class="pillar-header anim-fade-up">
       <div class="pillar-number">01</div>
       <div class="pillar-title-block">
         <h2>Search Performance</h2>
@@ -625,27 +625,27 @@
       </div>
     </div>
 
-    <div class="verdict strength">
+    <div class="verdict strength anim-fade-left">
       <strong>The headline:</strong> DeepL has built one of the most efficient organic search machines in any SaaS category. Authority Score of 98, 11.5M organic visits, and a $9M traffic-cost equivalent — all on functionally zero paid spend. They outperform Reverso (5.3M keywords) with just 593K keywords, converting at roughly 19× the rate.
     </div>
 
-    <div class="data-grid">
-      <div class="data-cell">
+    <div class="data-grid anim-stagger">
+      <div class="data-cell anim-fade-up">
         <div class="cell-label">Organic Keywords</div>
         <div class="cell-value blue">592,867</div>
         <div class="cell-note">vs Reverso: 5.3M (9× more)</div>
       </div>
-      <div class="data-cell">
+      <div class="data-cell anim-fade-up">
         <div class="cell-label">Organic Traffic</div>
         <div class="cell-value blue">11.5M</div>
         <div class="cell-note">vs Reverso: 4.9M (2.3× less)</div>
       </div>
-      <div class="data-cell">
+      <div class="data-cell anim-fade-up">
         <div class="cell-label">Backlinks</div>
         <div class="cell-value blue">8.0M</div>
         <div class="cell-note">From 59,492 unique referring domains</div>
       </div>
-      <div class="data-cell">
+      <div class="data-cell anim-fade-up">
         <div class="cell-label">Paid Spend</div>
         <div class="cell-value red">$13</div>
         <div class="cell-note">7 keywords, 6 visits total</div>
@@ -676,23 +676,23 @@
 
     <div style="height: 28px;"></div>
 
-    <div class="two-col">
-      <div class="finding">
+    <div class="two-col anim-stagger">
+      <div class="finding anim-fade-up">
         <div class="tag tag-risk">Concentration Risk</div>
         <h4>One page carries the business</h4>
         <p>67.1% of sampled organic traffic flows to /translator pages. In the top 100 keyword sample, there is not a single blog post, guide, or content marketing page ranking. The content function contributes zero measurable organic traffic.</p>
       </div>
-      <div class="finding">
+      <div class="finding anim-fade-up">
         <div class="tag tag-risk">Declining Trajectory</div>
         <h4>Keywords and traffic trending negative</h4>
         <p>A −10% decline in organic keywords and −3.3% drop in traffic. For a domain this strong, this signals either AI tools eating into translation queries or a failure to expand. Either way, the direction is wrong heading into an IPO window.</p>
       </div>
-      <div class="finding">
+      <div class="finding anim-fade-up">
         <div class="tag tag-risk">No Paid Safety Net</div>
         <h4>Zero infrastructure to catch an algorithm shift</h4>
         <p>If an algorithm update or AI search shift erodes organic rankings by even 5–10%, there's no paid infrastructure to catch that traffic. Especially exposed with Google actively surfacing its own Translate product in AI Overviews.</p>
       </div>
-      <div class="finding">
+      <div class="finding anim-fade-up">
         <div class="tag tag-gap">Narrow Keyword Portfolio</div>
         <h4>Owning one lane only</h4>
         <p>DeepL's keyword profile is almost exclusively "translate X to Y" queries. Reverso has expanded into grammar checking, spell checking, dictionary lookups, and contextual usage. DeepL dominates its lane — but only has one.</p>
@@ -704,7 +704,7 @@
   <!-- PILLAR 2: CONTENT & THOUGHT LEADERSHIP -->
   <!-- ============================================================ -->
   <section class="pillar">
-    <div class="pillar-header">
+    <div class="pillar-header anim-fade-up">
       <div class="pillar-number">02</div>
       <div class="pillar-title-block">
         <h2>Content & Thought Leadership</h2>
@@ -712,34 +712,34 @@
       </div>
     </div>
 
-    <div class="verdict risk">
+    <div class="verdict risk anim-fade-left">
       <strong>The headline:</strong> There is no visible content estate driving organic traffic. The blog is product- and engineering-focused with no content ranking for consideration-stage queries. No customer stories beyond a single Paysend case study and a Forrester TEI study. No vertical thought leadership for target sectors like pharma, legal, or academic.
     </div>
 
-    <div class="two-col">
-      <div class="finding">
+    <div class="two-col anim-stagger">
+      <div class="finding anim-fade-up">
         <div class="tag tag-risk">Zero Content Traffic</div>
         <h4>Blog and editorial contribute nothing to search</h4>
         <p>In the top 100 keyword sample, every ranking URL is a translator page, the homepage, the /pro page, or the /write page. Not a single blog post, guide, or thought leadership piece appears. The content marketing function is invisible in search.</p>
       </div>
-      <div class="finding">
+      <div class="finding anim-fade-up">
         <div class="tag tag-gap">No Mid-Funnel Layer</div>
         <h4>Missing the queries that matter for enterprise positioning</h4>
         <p>No visible rankings for consideration-stage queries like "best translation tool for legal documents," "how to localise pharmaceutical content," or "enterprise translation workflow" — exactly the queries that would support an IPO narrative about enterprise readiness.</p>
       </div>
-      <div class="finding">
+      <div class="finding anim-fade-up">
         <div class="tag tag-gap">Linguee Under-Leveraged</div>
         <h4>An owned asset sitting idle</h4>
         <p>DeepL owns Linguee (987K organic keywords, 776K traffic), but its authority score is only 72. Only 12K referring domains vs DeepL's 59.5K. There's a clear cross-pollination opportunity being left on the table — a dictionary/context tool with zero strategic connection to the parent brand.</p>
       </div>
-      <div class="finding">
+      <div class="finding anim-fade-up">
         <div class="tag tag-signal">Product-Only Blog</div>
         <h4>Content exists, but it's inward-facing</h4>
         <p>Blog covers DeepL Agent, Voice API, language launches, and internal culture. Very little that could be called demand-gen or thought leadership for target verticals. Events calendar is active (TRANSFORM 2026, GALA, DeepL Connect Seoul), but positioned for localization audiences only.</p>
       </div>
     </div>
 
-    <div class="callout">
+    <div class="callout anim-fade-up">
       <h4>The gap in simple terms</h4>
       <p>People either search for DeepL by name, or they search "translate X to Y" and land on the tool. <strong>There's nothing in between.</strong> No content capturing the enterprise buyer researching solutions, no vertical narratives for regulated industries, no editorial estate building category authority. The traffic data tells a binary story: brand search or utility search. A CMO preparing for an IPO needs a third lane.</p>
     </div>
@@ -749,7 +749,7 @@
   <!-- PILLAR 3: BRAND POSITIONING & MESSAGING -->
   <!-- ============================================================ -->
   <section class="pillar">
-    <div class="pillar-header">
+    <div class="pillar-header anim-fade-up">
       <div class="pillar-number">03</div>
       <div class="pillar-title-block">
         <h2>Brand Positioning & Market Perception</h2>
@@ -757,7 +757,7 @@
       </div>
     </div>
 
-    <div class="verdict mixed">
+    <div class="verdict mixed anim-fade-left">
       <strong>The headline:</strong> There's a structural disconnect between how DeepL positions itself ("Language AI platform, Agentic AI, enterprise ROI") and how the market actually finds and discusses it ("better than Google Translate, great for European languages"). The search ecosystem still frames DeepL alongside dictionaries and reference tools — not enterprise software.
     </div>
 
@@ -816,20 +816,20 @@
       </tbody>
     </table>
 
-    <div class="two-col" style="margin-top: 28px;">
-      <div class="finding">
+    <div class="two-col anim-stagger" style="margin-top: 28px;">
+      <div class="finding anim-fade-up">
         <div class="tag tag-signal">Competitor Ecosystem</div>
         <h4>Search places DeepL in translation/reference, not enterprise AI</h4>
         <p>Highest organic competitor relevance: SpanishDict (0.39), Linguee (0.36), Tureng (0.32), Pons (0.31), Reverso (0.16). DeepL is perceived as a peer to dictionaries and reference sites — not to enterprise workflow platforms.</p>
       </div>
-      <div class="finding">
+      <div class="finding anim-fade-up">
         <div class="tag tag-gap">The "Language AI" rebrand hasn't landed in search</div>
         <h4>Utility demand dwarfs brand narrative</h4>
         <p>Core "translate X to Y" terms drive 57.8% of traffic vs 6.2% for brand terms. Users choose DeepL as a tool, not necessarily as a brand with a differentiated story. The enterprise platform positioning isn't visible in how people discover and discuss the product.</p>
       </div>
     </div>
 
-    <div class="callout">
+    <div class="callout anim-fade-up">
       <h4>Earned media signal</h4>
       <p>The five highest-frequency themes in user/community discussion are: (1) <strong>"Better than Google Translate"</strong> as a universal benchmark, (2) <strong>European language superiority</strong> as a specific strength, (3) <strong>professional translator disruption anxiety</strong>, (4) <strong>Asian language quality gaps</strong> as the main negative, and (5) <strong>GDPR/security as the enterprise deciding factor</strong>. These organic narratives are more specific and emotionally resonant than DeepL's official messaging — and they're not being leveraged.</p>
     </div>
@@ -839,7 +839,7 @@
   <!-- PILLAR 4: AI DISCOVERABILITY -->
   <!-- ============================================================ -->
   <section class="pillar">
-    <div class="pillar-header">
+    <div class="pillar-header anim-fade-up">
       <div class="pillar-number">04</div>
       <div class="pillar-title-block">
         <h2>AI Discoverability</h2>
@@ -847,34 +847,34 @@
       </div>
     </div>
 
-    <div class="verdict mixed">
+    <div class="verdict mixed anim-fade-left">
       <strong>The headline:</strong> DeepL has 76.6K total AI mentions across Google AI Overviews, AI Mode, and Gemini. The brand has embedded itself into AI knowledge graphs through raw authority alone — without any apparent AEO strategy. But those mentions aren't converting to visits. AI platforms are using DeepL as a source, not sending users to it as a destination.
     </div>
 
-    <div class="data-grid">
-      <div class="data-cell">
+    <div class="data-grid anim-stagger">
+      <div class="data-cell anim-fade-up">
         <div class="cell-label">Google AI Overviews</div>
         <div class="cell-value amber">29.8K</div>
         <div class="cell-note">Mentions in AI Overview panels</div>
       </div>
-      <div class="data-cell">
+      <div class="data-cell anim-fade-up">
         <div class="cell-label">Google AI Mode</div>
         <div class="cell-value amber">20K</div>
         <div class="cell-note">~0% referral traffic from AI Mode</div>
       </div>
-      <div class="data-cell">
+      <div class="data-cell anim-fade-up">
         <div class="cell-label">Gemini</div>
         <div class="cell-value amber">17.6K</div>
         <div class="cell-note">Only 474 cited pages</div>
       </div>
-      <div class="data-cell">
+      <div class="data-cell anim-fade-up">
         <div class="cell-label">AI Traffic Share</div>
         <div class="cell-value red">~1%</div>
         <div class="cell-note">Despite 76.6K total mentions</div>
       </div>
     </div>
 
-    <div class="finding">
+    <div class="finding anim-fade-up">
       <div class="tag tag-risk">Source, Not Destination</div>
       <h4>AI platforms absorb DeepL's authority without returning traffic</h4>
       <p>The Gemini gap is the sharpest illustration: 17.6K mentions but only 474 cited pages. AI platforms are absorbing DeepL's domain authority to inform their own answers, then resolving the query without a click. This is the emerging structural risk for any brand whose value proposition can be "answered" directly by an AI model — and translation is a prime example.</p>
@@ -885,7 +885,7 @@
   <!-- PILLAR 5: REPUTATION & REVIEWS -->
   <!-- ============================================================ -->
   <section class="pillar">
-    <div class="pillar-header">
+    <div class="pillar-header anim-fade-up">
       <div class="pillar-number">05</div>
       <div class="pillar-title-block">
         <h2>Reputation & Customer Sentiment</h2>
@@ -893,36 +893,36 @@
       </div>
     </div>
 
-    <div class="verdict mixed">
+    <div class="verdict mixed anim-fade-left">
       <strong>The headline:</strong> DeepL scores 4.6–4.8 on product-focused review platforms (G2, Capterra, App Store, Gartner) where users evaluate translation quality. But on Trustpilot — where reviews skew toward billing, support, and customer experience — it drops to 1.8/5 from 662 reviews. The product is strong; the commercial experience has a perception problem.
     </div>
 
-    <div class="review-grid">
-      <div class="review-card">
+    <div class="review-grid anim-stagger">
+      <div class="review-card anim-fade-up">
         <div class="platform">G2</div>
         <div class="score green">4.6</div>
         <div class="review-count">~158 reviews</div>
         <div class="review-note">Auto-detect and real-time speed praised</div>
       </div>
-      <div class="review-card">
+      <div class="review-card anim-fade-up">
         <div class="platform">Capterra</div>
         <div class="score green">4.7</div>
         <div class="review-count">~154 reviews</div>
         <div class="review-note">Human-sounding output, DeepL Write highlighted</div>
       </div>
-      <div class="review-card">
+      <div class="review-card anim-fade-up">
         <div class="platform">Gartner</div>
         <div class="score green">4.7</div>
         <div class="review-count">~50+ reviews</div>
         <div class="review-note">Enterprise teams cite workflow efficiency</div>
       </div>
-      <div class="review-card">
+      <div class="review-card anim-fade-up">
         <div class="platform">App Store</div>
         <div class="score green">4.8</div>
         <div class="review-count">~175 reviews</div>
         <div class="review-note">Mobility praised; Romaji requested</div>
       </div>
-      <div class="review-card">
+      <div class="review-card anim-fade-up">
         <div class="platform">Trustpilot</div>
         <div class="score red">1.8</div>
         <div class="review-count">~662 reviews</div>
@@ -930,13 +930,13 @@
       </div>
     </div>
 
-    <div class="two-col" style="margin-top: 16px;">
-      <div class="finding">
+    <div class="two-col anim-stagger" style="margin-top: 16px;">
+      <div class="finding anim-fade-up">
         <div class="tag tag-risk">Product vs. Policy Split</div>
         <h4>Users love the AI, not the business</h4>
         <p>Trustpilot 1-star reviews concentrate on "non-existent customer support" and "faulty subscription renewals." The product quality isn't in question — the commercial experience is. This is a CX problem, not a product problem, but it shows up where prospects research.</p>
       </div>
-      <div class="finding">
+      <div class="finding anim-fade-up">
         <div class="tag tag-signal">Linguistic Bias</div>
         <h4>Strong in Europe, weak in Asia</h4>
         <p>Positive reviews are dominated by English, French, Spanish, and German users. Lower scores come from Japanese, Korean, and Romanian users, who report quality inconsistencies. As DeepL expands into 70+ languages, this gap will either close or become a louder narrative.</p>
@@ -948,7 +948,7 @@
   <!-- PILLAR 6: VIDEO & SOCIAL -->
   <!-- ============================================================ -->
   <section class="pillar">
-    <div class="pillar-header">
+    <div class="pillar-header anim-fade-up">
       <div class="pillar-number">06</div>
       <div class="pillar-title-block">
         <h2>Video & Social Presence</h2>
@@ -956,7 +956,7 @@
       </div>
     </div>
 
-    <div class="verdict neutral">
+    <div class="verdict neutral anim-fade-left">
       <strong>The headline:</strong> LinkedIn is the clear centre of gravity (~450K+ followers, 6%+ engagement on flagship content), and it's where DeepL's enterprise "Language AI" positioning lives. But beyond LinkedIn, presence drops off sharply: YouTube has just 2.25K subscribers, Instagram engagement is trending down, and Facebook mirrors LinkedIn content without a distinct purpose. The social function is LinkedIn-dependent, and video is built for credibility rather than reach.
     </div>
 
@@ -1008,13 +1008,13 @@
 
     <div style="height: 16px;"></div>
 
-    <div class="two-col">
-      <div class="finding">
+    <div class="two-col anim-stagger">
+      <div class="finding anim-fade-up">
         <div class="tag tag-strength">LinkedIn Dominance</div>
         <h4>450K+ followers and the highest engagement rate</h4>
         <p>LinkedIn is DeepL's largest community by a significant margin, aligning with the enterprise "Language AI" positioning. Engagement often exceeds 6% for flagship content like "Borderless Business" reports and AI research whitepapers. This is where their thought leadership actually lands.</p>
       </div>
-      <div class="finding">
+      <div class="finding anim-fade-up">
         <div class="tag tag-gap">Platform Drop-Off</div>
         <h4>Everything outside LinkedIn is low-scale or declining</h4>
         <p>X serves as a product announcement and support channel at 55K followers. Instagram engagement is in a broad downward trend, making it a low-priority lead gen channel. Facebook mirrors LinkedIn/X without a distinct audience or purpose. The social strategy is effectively a one-platform operation.</p>
@@ -1025,34 +1025,34 @@
     <div class="section-break" style="margin: 36px 0;"></div>
     <h3 style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 20px;">YouTube deep dive</h3>
 
-    <div class="data-grid">
-      <div class="data-cell">
+    <div class="data-grid anim-stagger">
+      <div class="data-cell anim-fade-up">
         <div class="cell-label">Videos Published</div>
         <div class="cell-value blue">102</div>
       </div>
-      <div class="data-cell">
+      <div class="data-cell anim-fade-up">
         <div class="cell-label">Subscribers</div>
         <div class="cell-value amber">2.25K</div>
       </div>
-      <div class="data-cell">
+      <div class="data-cell anim-fade-up">
         <div class="cell-label">Top Video Views</div>
         <div class="cell-value amber">~3,500</div>
         <div class="cell-note">"Multilingual Meetings with DeepL Voice"</div>
       </div>
-      <div class="data-cell">
+      <div class="data-cell anim-fade-up">
         <div class="cell-label">Content Pillars</div>
         <div class="cell-value blue">4</div>
         <div class="cell-note">Tutorials, Enterprise, Thought Leadership, Dev</div>
       </div>
     </div>
 
-    <div class="two-col" style="margin-top: 16px;">
-      <div class="finding">
+    <div class="two-col anim-stagger" style="margin-top: 16px;">
+      <div class="finding anim-fade-up">
         <div class="tag tag-signal">Content Mix</div>
         <h4>Four clear pillars, but low discovery</h4>
         <p>Product education (How to DeepL playlist, 12 guides), enterprise ROI, agentic AI thought leadership, and API developer docs. Most content is short-form tutorials or long-form webinar recordings. Views are in the hundreds — the top video sits at ~3,500. No breakout content driving awareness or consideration.</p>
       </div>
-      <div class="finding">
+      <div class="finding anim-fade-up">
         <div class="tag tag-opportunity">Untapped Format</div>
         <h4>No customer stories in video</h4>
         <p>No visible customer case study or documentary-style content. For a product with 1,570 employees and enterprise penetration, the absence of customer proof in video format is a missed opportunity — particularly for the enterprise positioning DeepL is pursuing.</p>
@@ -1124,6 +1124,27 @@
         tooltip: { enabled: false },
       },
     },
+  });
+})();
+
+// ============================================================
+// SCROLL ANIMATIONS
+// ============================================================
+(function () {
+  // Skip if reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.anim-fade-up, .anim-fade-left').forEach(el => {
+    observer.observe(el);
   });
 })();
 </script>
