@@ -509,6 +509,15 @@
       transform: translateY(0);
     }
   }
+  .section-number {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--violet);
+    margin-bottom: 6px;
+  }
 
   .maturity-card {
     background: linear-gradient(160deg, rgba(107,45,139,0.06) 0%, rgba(255,255,255,1) 100%);
@@ -1729,6 +1738,7 @@
       </div>
 
       <div class="dimensions-card results-reveal" style="--delay:0.10s;">
+        <div class="section-number">01 — Readiness breakdown</div>
         <h3>Your readiness breakdown</h3>
         <div class="breakdown-layout">
           <div class="breakdown-visual">
@@ -1792,7 +1802,7 @@
       <div class="maturity-card results-reveal" style="--delay:0.18s;">
         <div class="maturity-header">
           <div>
-            <div class="maturity-eyebrow">Accounting AI Maturity Model</div>
+            <div class="maturity-eyebrow">02 — Accounting AI Maturity Model</div>
             <div class="maturity-title" id="maturity-title">Level 1: Manual & Disconnected</div>
           </div>
           <div class="maturity-badge" id="maturity-badge">Level 1</div>
@@ -2589,6 +2599,7 @@ function showResults() {
   }
 
   document.getElementById('insight-analysis').innerHTML = `
+    <div class="section-number">03 — Analysis</div>
     <h3>Why This Matters</h3>
     <p>The quiz is telling us that this is the area most likely to slow progress unless it gets addressed first.</p>
     <div class="analysis-grid">
@@ -2609,6 +2620,7 @@ function showResults() {
   `;
 
   document.getElementById('insight-playbook').innerHTML = `
+    <div class="section-number">05 — Playbook</div>
     <h3>Start Here In The Playbook</h3>
     <p>We already know where to point you next. These are the two sections most aligned to the gap your answers surfaced.</p>
     <div class="playbook-layout">
@@ -2630,6 +2642,7 @@ function showResults() {
 
   const nextSteps = getPriorityActions(selected);
   document.getElementById('insight-next-steps').innerHTML = `
+    <div class="section-number">04 — Next steps</div>
     <h3>Your next 3 moves</h3>
     <p>The clearest way to improve your readiness from here is to tighten the lowest-scoring inputs in your quiz response and turn them into a cleaner path forward.</p>
     <div class="action-cards">
