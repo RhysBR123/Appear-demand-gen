@@ -913,6 +913,46 @@
     background: linear-gradient(135deg, rgba(107,45,139,0.06) 0%, rgba(255,255,255,1) 100%);
     border-color: rgba(107,45,139,0.12);
   }
+  /* From the playbook callout */
+  .playbook-callout {
+    margin-top: 24px;
+    padding: 16px 20px;
+    border-left: 3px solid var(--purple);
+    background: var(--pale);
+    border-radius: 0 12px 12px 0;
+  }
+  .playbook-callout-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.68rem;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--purple);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .playbook-callout-label svg {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+  }
+  .playbook-callout p {
+    font-family: 'Fraunces', serif;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--plum);
+    font-style: italic;
+    font-weight: 400;
+    margin: 0;
+  }
+  @keyframes calloutPulse {
+    0%, 100% { border-left-color: var(--purple); }
+    50% { border-left-color: var(--violet); }
+  }
+  .playbook-callout.animate-in {
+    animation: calloutPulse 1.2s ease 0.4s 2;
+  }
   .strength-card {
     background: linear-gradient(135deg, rgba(53,189,136,0.08) 0%, rgba(255,255,255,1) 100%);
     border-color: rgba(53,189,136,0.16);
@@ -1797,6 +1837,13 @@
             </div>
           </div>
         </div>
+        <div class="playbook-callout">
+          <div class="playbook-callout-label">
+            <svg viewBox="0 0 12 12" fill="none"><rect x="1" y="1" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><line x1="3.5" y1="4" x2="8.5" y2="4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="3.5" y1="6" x2="8.5" y2="6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="3.5" y1="8" x2="6.5" y2="8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            From the playbook
+          </div>
+          <p>"Before you can improve the way your team works, you need to understand where it is today. These four dimensions reveal exactly that — and where AI can have the biggest impact."</p>
+        </div>
       </div>
 
       <div class="maturity-card results-reveal" style="--delay:0.18s;">
@@ -1836,6 +1883,13 @@
             <p id="maturity-journey-copy">Your current level is highlighted below, with the rest of the model shown as the path ahead.</p>
           </div>
           <div class="maturity-scale" id="maturity-scale"></div>
+        </div>
+        <div class="playbook-callout">
+          <div class="playbook-callout-label">
+            <svg viewBox="0 0 12 12" fill="none"><rect x="1" y="1" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><line x1="3.5" y1="4" x2="8.5" y2="4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="3.5" y1="6" x2="8.5" y2="6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="3.5" y1="8" x2="6.5" y2="8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            From the playbook
+          </div>
+          <p>"A well-executed pilot builds confidence in the technology and creates a roadmap for scaling AI across your organisation. Start small, then expand."</p>
         </div>
       </div>
 
@@ -2618,6 +2672,7 @@ function showResults() {
     </div>
     ${riskHtml}
   `;
+  document.getElementById('insight-analysis').innerHTML += `<div class="playbook-callout animate-in"><div class="playbook-callout-label"><svg viewBox="0 0 12 12" fill="none"><rect x="1" y="1" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><line x1="3.5" y1="4" x2="8.5" y2="4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="3.5" y1="6" x2="8.5" y2="6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="3.5" y1="8" x2="6.5" y2="8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>From the playbook</div><p>"AI isn't just a finance initiative — it's a cross-functional effort. Aligning goals across finance, audit, and IT ensures collaboration and buy-in from all stakeholders."</p></div>`;
 
   document.getElementById('insight-playbook').innerHTML = `
     <div class="section-number">05 — Playbook</div>
