@@ -783,6 +783,13 @@
     height: 100%;
     display: block;
   }
+  @keyframes radarGlow {
+    0%, 100% { filter: drop-shadow(0 0 4px rgba(107,45,139,0.3)); }
+    50% { filter: drop-shadow(0 0 12px rgba(107,45,139,0.6)); }
+  }
+  .breakdown-radar.glow-active {
+    animation: radarGlow 2s ease-in-out 3;
+  }
   .breakdown-bars {
     display: grid;
     gap: 14px;
@@ -2376,6 +2383,12 @@ function renderRadarChart(dimensionScores) {
       return `<text x="${labelPoint.x}" y="${labelPoint.y + dy}" text-anchor="${anchor}" font-size="13" font-weight="700" fill="#5A4665">${label.text}</text>`;
     }).join('')}
   `;
+  setTimeout(() => {
+    const radar = document.getElementById('readiness-radar');
+    if (radar) {
+      radar.classList.add('glow-active');
+    }
+  }, 800);
 }
 
 function getMaturityProgress(total) {
