@@ -434,9 +434,17 @@
     height: 300px;
     background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
   }
+  .score-display::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+  }
   .score-pct {
     font-family: 'Fraunces', serif;
-    font-size: 4.5rem;
+    font-size: 6rem;
     font-weight: 700;
     color: var(--white);
     line-height: 1;
@@ -452,7 +460,7 @@
   }
   .score-profile {
     font-family: 'Fraunces', serif;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     color: var(--white);
     font-weight: 500;
   }
@@ -463,6 +471,28 @@
     line-height: 1.7;
     color: rgba(255,255,255,0.82);
     position: relative;
+  }
+  .score-arc-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 8px;
+  }
+  .score-arc-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .score-arc-wrap .score-pct {
+    position: relative;
+    z-index: 1;
+  }
+  .score-arc-fill {
+    transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .results-reveal {
@@ -1274,6 +1304,10 @@
 
     .hero { padding: 56px 20px 72px; }
     .score-pct { font-size: 3.5rem; }
+    .score-arc-wrap {
+      width: 130px;
+      height: 130px;
+    }
     .score-intro { font-size: 0.9rem; }
   }
 
@@ -1604,7 +1638,13 @@
     <!-- Results -->
     <div class="results-section" id="results-section">
       <div class="score-display results-reveal" style="--delay:0.02s;">
-        <div class="score-pct" id="score-pct">0%</div>
+        <div class="score-arc-wrap">
+          <svg class="score-arc-svg" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="score-arc-track" cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+            <circle class="score-arc-fill" id="score-arc-fill" cx="60" cy="60" r="52" fill="none" stroke="rgba(200,159,214,0.6)" stroke-width="4" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" transform="rotate(-90 60 60)"/>
+          </svg>
+          <div class="score-pct" id="score-pct">0%</div>
+        </div>
         <div class="score-label">AI Readiness Score</div>
         <div class="score-profile" id="score-profile">—</div>
         <p class="score-intro" id="score-intro"></p>
@@ -2365,6 +2405,16 @@ function showResults() {
     if (progress < 1) requestAnimationFrame(countStep);
   };
   requestAnimationFrame(countStep);
+
+  // Animate score arc
+  const arcFill = document.getElementById('score-arc-fill');
+  if (arcFill) {
+    const circumference = 326.7;
+    const offset = circumference - (pct / 100) * circumference;
+    setTimeout(() => {
+      arcFill.style.strokeDashoffset = offset;
+    }, 200);
+  }
 
   // Dimensions
   const dimensionScores = getDimensionScores(selected);
