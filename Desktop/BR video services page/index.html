@@ -324,71 +324,51 @@
 
   /* ─── SOCIAL PROOF ─── */
   .social-proof {
-    background: var(--bg-light);
-    color: var(--text-dark);
     padding: var(--section-padding) 0;
+    border-top: 1px solid var(--border);
   }
-  .social-proof .section-label { color: var(--accent-dark); }
-
-  /* Logo strip */
   .logo-strip {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(24px, 4vw, 56px);
+    gap: clamp(12px, 3vw, 32px);
     flex-wrap: wrap;
     margin-bottom: 56px;
   }
-  .logo-slot {
-    width: 120px;
-    height: 40px;
-    background: rgba(31,31,31,0.08);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .logo-slot span {
+  .logo-pill {
+    padding: 8px 20px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
     font-size: 0.72rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: rgba(31,31,31,0.3);
+    color: var(--text-muted);
   }
-
-  /* Testimonials */
   .testimonials {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
   }
   .testimonial {
-    background: var(--bg-light-card);
-    border: 1px solid var(--border-dark);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
     border-radius: var(--radius-md);
     padding: 32px;
-  }
-  .testimonial-mark {
-    font-size: 3rem;
-    line-height: 1;
-    color: var(--accent-dark);
-    font-weight: 800;
-    margin-bottom: 12px;
-    display: block;
   }
   .testimonial-quote {
     font-size: 1.02rem;
     line-height: 1.65;
-    color: var(--text-dark);
+    color: var(--text-primary);
     margin-bottom: 20px;
-    font-weight: 400;
   }
   .testimonial-attr {
     font-size: 0.82rem;
-    color: var(--text-dark-secondary);
+    color: var(--text-secondary);
     font-weight: 600;
   }
-  .testimonial-attr span { color: var(--accent-dark); }
+  .testimonial-attr span { color: var(--accent); }
 
   /* ─── CTA ─── */
   .cta-section { padding: var(--section-padding) 0 clamp(48px, 8vw, 96px); }
@@ -429,6 +409,7 @@
   @media (max-width: 960px) {
     .testimonials { grid-template-columns: 1fr; }
   }
+
   @media (max-width: 640px) {
     .nav-links {
       display: none;
@@ -565,25 +546,19 @@
   <section class="social-proof">
     <div class="container">
       <p class="section-label">Trusted by</p>
-
-      <!-- Logo strip — replace placeholders with actual client logos -->
       <div class="logo-strip">
-        <div class="logo-slot"><span>[Client]</span></div>
-        <div class="logo-slot"><span>[Client]</span></div>
-        <div class="logo-slot"><span>[Client]</span></div>
-        <div class="logo-slot"><span>[Client]</span></div>
-        <div class="logo-slot"><span>[Client]</span></div>
+        <span class="logo-pill">[Client]</span>
+        <span class="logo-pill">[Client]</span>
+        <span class="logo-pill">[Client]</span>
+        <span class="logo-pill">[Client]</span>
+        <span class="logo-pill">[Client]</span>
       </div>
-
-      <!-- Testimonials — replace with real quotes -->
       <div class="testimonials">
         <div class="testimonial reveal">
-          <span class="testimonial-mark">&ldquo;</span>
           <p class="testimonial-quote">[Testimonial quote — replace with real customer quote. Keep it short, specific, and outcome-focused. One or two sentences max.]</p>
           <p class="testimonial-attr">[Name] &mdash; <span>[Title, Company]</span></p>
         </div>
         <div class="testimonial reveal reveal-delay-1">
-          <span class="testimonial-mark">&ldquo;</span>
           <p class="testimonial-quote">[Testimonial quote — replace with real customer quote. Keep it short, specific, and outcome-focused. One or two sentences max.]</p>
           <p class="testimonial-attr">[Name] &mdash; <span>[Title, Company]</span></p>
         </div>
