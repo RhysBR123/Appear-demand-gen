@@ -209,27 +209,42 @@
   }
   .ticker-item em { color: var(--accent); font-style: normal; opacity: 0.7; }
 
-  /* ─── CONVICTION STATEMENTS ─── */
+  /* ─── CONVICTION ─── */
   .conviction {
-    padding: clamp(60px, 10vw, 120px) 0;
+    padding: clamp(80px, 12vw, 140px) 0;
     border-top: 1px solid var(--border);
   }
   .conviction-statement {
-    font-size: clamp(1.8rem, 4.5vw, 3.4rem);
+    font-size: clamp(2rem, 5vw, 4rem);
     font-weight: 700;
     letter-spacing: -0.03em;
-    line-height: 1.15;
-    color: var(--text-secondary);
-    padding: clamp(24px, 4vw, 40px) 0;
-    border-bottom: 1px solid var(--border);
-    transition: color 0.3s;
+    line-height: 1.1;
+    color: var(--text-primary);
+    padding: clamp(28px, 4vw, 48px) 0;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
   }
-  .conviction-statement:first-child { border-top: 1px solid var(--border); }
-  .conviction-statement:hover { color: var(--text-primary); }
   .conviction-statement.accent {
     color: var(--accent);
+    font-size: clamp(2.4rem, 6vw, 4.8rem);
   }
-  .conviction-statement.accent:hover { color: var(--accent-hover); }
+  .conviction-statement .scanline {
+    position: absolute;
+    top: 0; left: -100%; bottom: 0;
+    width: 100%;
+    background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+    opacity: 0.15;
+    pointer-events: none;
+  }
+  .conviction-statement.scan-done { opacity: 1; }
+  .conviction-statement.scanning .scanline {
+    animation: scan 0.5s ease-out forwards;
+  }
+  @keyframes scan {
+    from { left: -100%; }
+    to { left: 100%; }
+  }
 
   /* ─── SERVICES GRID ─── */
   .services { padding: var(--section-padding) 0; border-top: 1px solid var(--border); }
@@ -402,7 +417,6 @@
   }
   @media (max-width: 640px) {
     .services-grid { grid-template-columns: 1fr; }
-    .conviction-statement { font-size: 1.6rem; }
     .nav-links {
       display: none;
       flex-direction: column;
@@ -471,9 +485,9 @@
   <!-- ── CONVICTION STATEMENTS ── -->
   <section class="conviction">
     <div class="container">
-      <p class="conviction-statement reveal">Most B2B marketing talks to itself.</p>
-      <p class="conviction-statement reveal reveal-delay-1">The best demand generation starts with brand. The best brand pays off in pipeline.</p>
-      <p class="conviction-statement accent reveal reveal-delay-2">We build both.</p>
+      <p class="conviction-statement" data-conviction><span class="scanline"></span>Most B2B marketing talks to itself.</p>
+      <p class="conviction-statement" data-conviction><span class="scanline"></span>The best demand generation starts with brand. The best brand pays off in pipeline.</p>
+      <p class="conviction-statement accent" data-conviction><span class="scanline"></span>We build both.</p>
     </div>
   </section>
 
