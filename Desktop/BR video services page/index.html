@@ -319,6 +319,10 @@
     padding: 32px 0;
     border-bottom: 1px solid rgba(1,254,229,0.2);
   }
+  .service-cta-row:hover {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
   .service-cta-row .service-num { color: rgba(1,254,229,0.3); }
   .service-cta-row .service-name { color: var(--accent); }
 
@@ -443,6 +447,12 @@
     .nav-links.open { display: flex; }
     .mobile-menu-btn { display: block; }
   }
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track { animation: none; }
+    .reveal { transition: none; opacity: 1; }
+    .hero-sub { transition: none; }
+    .hero-actions { transition: none; }
+  }
 </style>
 </head>
 <body>
@@ -460,7 +470,7 @@
       <li><a href="/social-distribution">Social</a></li>
       <li><a href="/contact">Contact</a></li>
     </ul>
-    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links" type="button">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="3" width="22" height="2" rx="1" fill="currentColor"/><rect y="10" width="22" height="2" rx="1" fill="currentColor"/><rect y="17" width="22" height="2" rx="1" fill="currentColor"/></svg>
     </button>
   </div>
@@ -471,7 +481,7 @@
   <!-- ── HERO ── -->
   <section class="hero">
     <div class="container hero-top">
-      <h1 class="hero-headline" id="hero-headline"><span class="cursor"></span></h1>
+      <h1 class="hero-headline" id="hero-headline"><noscript>B2B marketing that earns its place</noscript><span class="cursor"></span></h1>
       <p class="hero-sub" id="hero-sub">We work with B2B tech companies that want strategy and execution in the same room — brand that positions, content that moves buyers, and distribution that reaches the right people.</p>
       <div class="hero-actions" id="hero-actions">
         <a href="mailto:hello@branchroad.media" class="btn-primary">Start a conversation</a>
@@ -629,14 +639,15 @@
   if (track) {
     let x = 0;
     const speed = 0.5; // px per frame
+    const halfWidth = track.scrollWidth / 2;
     function animateTicker() {
       x -= speed;
-      const halfWidth = track.scrollWidth / 2;
       if (Math.abs(x) >= halfWidth) x = 0;
       track.style.transform = `translateX(${x}px)`;
       requestAnimationFrame(animateTicker);
     }
-    requestAnimationFrame(animateTicker);
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced) requestAnimationFrame(animateTicker);
   }
 
   // ─── Conviction scan-line ───
@@ -645,7 +656,12 @@
       if (entry.isIntersecting) {
         const el = entry.target;
         el.classList.add('scanning');
+        const scanFallback = setTimeout(() => {
+          el.classList.add('scan-done');
+          el.classList.remove('scanning');
+        }, 800);
         el.addEventListener('animationend', () => {
+          clearTimeout(scanFallback);
           el.classList.add('scan-done');
           el.classList.remove('scanning');
         }, { once: true });
