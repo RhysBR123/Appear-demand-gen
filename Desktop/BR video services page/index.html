@@ -150,109 +150,39 @@
   .btn-secondary:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.04); transform: translateY(-2px); }
 
   /* ─── HERO ─── */
-  .hero { padding: 140px 0 72px; }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 28px;
-    align-items: center;
-  }
-  .hero-copy { display: flex; flex-direction: column; gap: 0; }
-
-  .hero-kicker {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    margin-bottom: 20px;
-  }
-
-  h1 {
-    font-size: clamp(3rem, 7vw, 5.6rem);
-    line-height: 1.0;
+  .hero { padding: 140px 0 0; min-height: 60vh; display: flex; flex-direction: column; justify-content: flex-end; }
+  .hero-top { padding-bottom: 56px; }
+  .hero-headline {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800;
     letter-spacing: -0.04em;
-    margin-bottom: 22px;
-    max-width: 15ch;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    min-height: 1.1em;
   }
-  h1 em { color: var(--accent); font-style: normal; }
-
+  .hero-headline .cursor {
+    display: inline-block;
+    width: 3px;
+    height: 0.85em;
+    background: var(--accent);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+  .hero-headline em { color: var(--accent); font-style: normal; }
   .hero-sub {
     color: var(--text-secondary);
     font-size: clamp(1rem, 1.6vw, 1.1rem);
     line-height: 1.65;
     max-width: 54ch;
     margin-bottom: 32px;
-  }
-  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-
-  /* ─── HERO ANIMATED CARD ─── */
-  .hero-phrase-card {
-    border: 1px solid rgba(1,254,229,0.2);
-    border-radius: 32px;
-    background: #050505;
-    min-height: 340px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 48px 40px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-phrase-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 60% 40%, rgba(1,254,229,0.06) 0%, transparent 65%);
-    pointer-events: none;
-  }
-  .hero-phrase-wrap {
-    position: relative;
-    text-align: center;
-  }
-  .hero-phrase {
-    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.2;
-    color: var(--text-primary);
     opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    white-space: nowrap;
+    transition: opacity 0.6s ease;
   }
-  .hero-phrase.active {
-    opacity: 1;
-    transform: translateY(0);
-    position: relative;
-  }
-  .hero-phrase em { color: var(--accent); font-style: normal; }
-  .hero-phrase-label {
-    margin-top: 20px;
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-  }
-  .hero-phrase-dots {
-    display: flex;
-    gap: 6px;
-    justify-content: center;
-    margin-top: 28px;
-  }
-  .hero-phrase-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--text-muted);
-    transition: background 0.3s;
-    cursor: pointer;
-  }
-  .hero-phrase-dot.active { background: var(--accent); }
+  .hero-sub.visible { opacity: 1; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; opacity: 0; transition: opacity 0.6s ease 0.2s; }
+  .hero-actions.visible { opacity: 1; }
 
   /* ─── CONVICTION STATEMENTS ─── */
   .conviction {
@@ -445,13 +375,7 @@
     .services-grid { grid-template-columns: repeat(2, 1fr); }
     .testimonials { grid-template-columns: 1fr; }
   }
-  @media (max-width: 860px) {
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-phrase-card { min-height: 200px; padding: 36px 28px; }
-    .hero-phrase { font-size: 1.5rem; white-space: normal; }
-  }
   @media (max-width: 640px) {
-    h1 { font-size: 2.8rem; }
     .services-grid { grid-template-columns: 1fr; }
     .conviction-statement { font-size: 1.6rem; }
     .nav-links {
@@ -494,34 +418,12 @@
 
   <!-- ── HERO ── -->
   <section class="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="hero-kicker">Branch Road</p>
-          <h1>B2B marketing that <em>earns its place</em></h1>
-          <p class="hero-sub">We work with B2B tech companies that want strategy and execution in the same room — brand that positions, content that moves buyers, and distribution that reaches the right people.</p>
-          <div class="hero-actions">
-            <a href="mailto:hello@branchroad.media" class="btn-primary">Start a conversation</a>
-            <a href="#services" class="btn-secondary">See our services</a>
-          </div>
-        </div>
-        <div class="hero-phrase-card" aria-hidden="true">
-          <div class="hero-phrase-wrap">
-            <p class="hero-phrase active">Narrative before <em>noise</em></p>
-            <p class="hero-phrase">Brand before <em>demand</em></p>
-            <p class="hero-phrase">Visibility before <em>volume</em></p>
-            <p class="hero-phrase">Strategy before <em>execution</em></p>
-            <p class="hero-phrase">Position before <em>content</em></p>
-          </div>
-          <p class="hero-phrase-label">How we think</p>
-          <div class="hero-phrase-dots" id="phrase-dots">
-            <span class="hero-phrase-dot active"></span>
-            <span class="hero-phrase-dot"></span>
-            <span class="hero-phrase-dot"></span>
-            <span class="hero-phrase-dot"></span>
-            <span class="hero-phrase-dot"></span>
-          </div>
-        </div>
+    <div class="container hero-top">
+      <h1 class="hero-headline" id="hero-headline"><span class="cursor"></span></h1>
+      <p class="hero-sub" id="hero-sub">We work with B2B tech companies that want strategy and execution in the same room — brand that positions, content that moves buyers, and distribution that reaches the right people.</p>
+      <div class="hero-actions" id="hero-actions">
+        <a href="mailto:hello@branchroad.media" class="btn-primary">Start a conversation</a>
+        <a href="#services" class="btn-secondary">See our services</a>
       </div>
     </div>
   </section>
