@@ -599,6 +599,57 @@
 </main>
 
 <script>
+  // ─── Typewriter hero ───
+  const headline = document.getElementById('hero-headline');
+  const sub = document.getElementById('hero-sub');
+  const actions = document.getElementById('hero-actions');
+  const fullText = 'B2B marketing that earns its place';
+  const cursor = headline.querySelector('.cursor');
+  let i = 0;
+
+  function type() {
+    if (i < fullText.length) {
+      cursor.insertAdjacentText('beforebegin', fullText[i]);
+      i++;
+      setTimeout(type, i === 1 ? 80 : 40 + Math.random() * 40);
+    } else {
+      sub.classList.add('visible');
+      actions.classList.add('visible');
+    }
+  }
+  setTimeout(type, 400);
+
+  // ─── Ticker ───
+  const track = document.getElementById('ticker-track');
+  if (track) {
+    let x = 0;
+    const speed = 0.5; // px per frame
+    function animateTicker() {
+      x -= speed;
+      const halfWidth = track.scrollWidth / 2;
+      if (Math.abs(x) >= halfWidth) x = 0;
+      track.style.transform = `translateX(${x}px)`;
+      requestAnimationFrame(animateTicker);
+    }
+    requestAnimationFrame(animateTicker);
+  }
+
+  // ─── Conviction scan-line ───
+  const convictionObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        el.classList.add('scanning');
+        el.addEventListener('animationend', () => {
+          el.classList.add('scan-done');
+          el.classList.remove('scanning');
+        }, { once: true });
+        convictionObs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('[data-conviction]').forEach(el => convictionObs.observe(el));
+
   // ─── Mobile nav ───
   const btn = document.getElementById('mobile-menu-btn');
   const links = document.getElementById('nav-links');
@@ -617,11 +668,11 @@
     });
   });
 
-  // ─── Scroll reveal ───
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  // ─── Scroll reveal (testimonials) ───
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 </script>
 </body>
 </html>
