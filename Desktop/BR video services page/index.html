@@ -523,38 +523,6 @@
 </main>
 
 <script>
-  // ─── Hero phrase animation ───
-  const phrases = document.querySelectorAll('.hero-phrase');
-  const dots = document.querySelectorAll('.hero-phrase-dot');
-  let current = 0;
-  let timer;
-
-  function showPhrase(index) {
-    phrases[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = index;
-    phrases[current].classList.add('active');
-    dots[current].classList.add('active');
-  }
-
-  function next() {
-    showPhrase((current + 1) % phrases.length);
-  }
-
-  function startTimer() {
-    timer = setInterval(next, 2800);
-  }
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      clearInterval(timer);
-      showPhrase(i);
-      startTimer();
-    });
-  });
-
-  startTimer();
-
   // ─── Mobile nav ───
   const btn = document.getElementById('mobile-menu-btn');
   const links = document.getElementById('nav-links');
