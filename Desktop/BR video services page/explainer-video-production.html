@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explainer Video Production for B2B Tech | Branch Road Media</title>
+<meta name="description" content="Explainer video production for B2B tech companies. Live action and animated explainer video production to increase conversion, support sales enablement, and shorten sales cycles.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href=""><!-- TODO: Set canonical URL e.g. https://branchroad.media/explainer-video-production -->
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Explainer Video Production for B2B Tech | Branch Road Media">
+<meta property="og:description" content="Conversion-focused explainer video production for B2B tech teams. Strategy, scriptwriting, production, and campaign-ready versions.">
+<meta property="og:image" content=""><!-- TODO: Add OG image URL -->
+<meta property="og:url" content=""><!-- TODO: Set page URL -->
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Explainer Video Production for B2B Tech | Branch Road Media">
+<meta name="twitter:description" content="Explainer video production and animated explainer video production that drives qualified pipeline.">
+<meta name="twitter:image" content=""><!-- TODO: Add Twitter image URL -->
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Explainer Video Production",
+  "provider": {
+    "@type": "Organization",
+    "name": "Branch Road Media"
+  },
+  "description": "Explainer video production and animated explainer video production for B2B tech companies, including strategy, scripting, storyboarding, production, and post-production.",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "GBP",
+    "price": "3500",
+    "description": "Starting from GBP 3,500 per explainer video. Includes scripting, production, and two revision rounds."
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is included in your explainer video production service?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our service includes strategy, scriptwriting, storyboarding, production, editing, subtitles, branded graphics, and music licensing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you handle animated explainer video production?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We produce animated explainers, live-action explainers, and hybrid formats depending on your product and campaign goals."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How quickly can you deliver a product explainer video?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most projects run 3 to 6 weeks depending on complexity, approvals, and the number of deliverable versions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can one explainer video be versioned for different channels?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We can produce one core explainer plus paid social, website, and sales enablement cutdowns."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg-primary: #1F1F1F;
+    --bg-secondary: #171717;
+    --bg-card: #000000;
+    --bg-soft: #0f0f0f;
+    --bg-light: #EAFFFD;
+    --bg-light-card: #FFFFFF;
+    --text-primary: #FFFFFF;
+    --text-secondary: rgba(255,255,255,0.6);
+    --text-muted: rgba(255,255,255,0.3);
+    --text-dark: #1F1F1F;
+    --text-dark-secondary: rgba(31,31,31,0.55);
+    --accent: #01FEE5;
+    --accent-hover: #33FFE9;
+    --accent-soft: rgba(1,254,229,0.1);
+    --accent-glow: rgba(1,254,229,0.15);
+    --accent-dark: #00C9B5;
+    --border: rgba(255,255,255,0.06);
+    --border-dark: rgba(31,31,31,0.08);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --max-width: 1200px;
+    --section-padding: clamp(28px,4vw,48px);
+    --font: 'Outfit', system-ui, -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(31,31,31,0.85);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 40px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 74px;
+  }
+  .nav-logo {
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 26px; list-style: none; }
+  .nav-links a {
+    position: relative;
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 1px;
+    background: var(--text-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-links a[aria-current="page"] { color: var(--text-primary); }
+  .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+  .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-primary); padding: 8px; cursor: pointer; }
+
+  .hero {
+    padding: 126px 0 56px;
+  }
+  main {
+    padding-top: clamp(8px, 2vw, 20px);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 22px;
+    align-items: stretch;
+  }
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+  .eyebrow {
+    display: inline-flex;
+    width: fit-content;
+    white-space: nowrap;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(1,254,229,0.25);
+    background: var(--accent-soft);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.74rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 14px var(--accent-glow);
+  }
+  h1 {
+    font-size: clamp(2.6rem, 6.2vw, 5rem);
+    line-height: 1.01;
+    letter-spacing: -0.04em;
+    margin-bottom: 16px;
+    max-width: 12ch;
+  }
+  h1 em { color: var(--accent); font-style: normal; }
+  .hero-sub {
+    color: var(--text-secondary);
+    max-width: 60ch;
+    font-size: clamp(1rem, 1.6vw, 1.08rem);
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 18px 36px;
+    font-size: 0.95rem;
+    transition: all 0.25s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg-card);
+    font-weight: 700;
+  }
+  .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 32px var(--accent-glow); }
+  .btn-secondary {
+    color: var(--text-primary);
+    border: 2px solid rgba(255,255,255,0.12);
+    font-weight: 500;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.04); transform: translateY(-2px); }
+
+  .hero-card-body {
+    padding: 18px 22px 22px;
+    border-top: 1px solid var(--border);
+  }
+  .hero-price-panel {
+    margin-top: 14px;
+    border: 1px solid rgba(1,254,229,0.35);
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(1,254,229,0.08), rgba(1,254,229,0.03));
+    padding: 14px 16px;
+  }
+  .hero-price-label {
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .hero-price-value {
+    color: var(--text-primary);
+    font-size: 1.7rem;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .hero-price-copy {
+    color: var(--text-secondary);
+    font-size: 0.86rem;
+  }
+  .hero-card-action {
+    margin-top: 16px;
+  }
+  .hero-card-action .btn-primary {
+    width: 100%;
+    font-size: 1.02rem;
+    padding: 16px 24px;
+  }
+
+  .hero-card {
+    border: 1px solid rgba(1,254,229,0.25);
+    border-radius: 32px;
+    background: #060606;
+    overflow: hidden;
+  }
+  .hero-card h2 {
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .hero-card-copy {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    margin-bottom: 12px;
+  }
+  .hero-media {
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: #0a0a0a;
+  }
+  .hero-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-example-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+  .hero-example-tags span {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.03);
+    color: var(--text-secondary);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+  }
+
+  section.block { padding: var(--section-padding) 0; }
+  .section-head { margin-bottom: 20px; }
+  .section-label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.76rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+  h2 em { color: var(--accent); font-style: normal; }
+
+  .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    padding: 20px;
+  }
+  .card h3 { font-size: 1.02rem; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .card p,
+  .card li { color: var(--text-secondary); font-size: 0.92rem; }
+  .type-example {
+    margin: -20px -20px 14px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+  .type-example video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .type-example-label {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    background: rgba(0,0,0,0.7);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 0.72rem;
+    border-radius: 999px;
+    padding: 4px 10px;
+  }
+
+  .process {
+    counter-reset: steps;
+    display: grid;
+    gap: 12px;
+    margin-top: 20px;
+    position: relative;
+    padding-left: 34px;
+  }
+  .step {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    padding: 18px 18px 18px 22px;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .process .step.reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+  .process .step.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .process .step:nth-child(1).visible { transition-delay: 0.04s; }
+  .process .step:nth-child(2).visible { transition-delay: 0.12s; }
+  .process .step:nth-child(3).visible { transition-delay: 0.2s; }
+  .process .step:nth-child(4).visible { transition-delay: 0.28s; }
+  .step:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px rgba(0,0,0,0.18);
+  }
+  .step::before {
+    counter-increment: steps;
+    content: counter(steps, decimal-leading-zero);
+    position: absolute;
+    left: -34px;
+    top: 18px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #0d3f3a;
+    border: 1px solid rgba(1,254,229,0.45);
+    color: #d7fff9;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+  }
+  .step-tag {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .step h3 { font-size: 1.06rem; margin-bottom: 6px; letter-spacing: -0.01em; }
+  .step p { color: var(--text-secondary); font-size: 0.92rem; }
+  .process-wrapper { background: var(--bg-light); color: var(--text-dark); }
+  .process-wrapper .section-label { color: var(--accent-dark); }
+  .process-wrapper h2 { color: var(--text-dark); }
+  .process-wrapper h2 em { color: var(--accent-dark); }
+  .process-wrapper .step {
+    background: var(--bg-light-card);
+    border-color: var(--border-dark);
+  }
+  .process-wrapper .step::before {
+    background: rgba(0,201,181,0.18);
+    border-color: rgba(0,201,181,0.3);
+    color: var(--accent-dark);
+  }
+  .process-wrapper .step-tag { color: var(--accent-dark); }
+  .process-wrapper .step p { color: var(--text-dark-secondary); }
+
+  .cta {
+    margin: clamp(20px, 3vw, 36px) 0;
+    border: 1px solid rgba(1,254,229,0.2);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(1,254,229,0.15), rgba(1,254,229,0.05), rgba(0,0,0,0.2));
+    padding: clamp(30px, 6vw, 46px);
+    text-align: center;
+  }
+  .cta h2 { margin-bottom: 10px; }
+  .cta p { color: rgba(255,255,255,0.88); max-width: 66ch; margin: 0 auto 14px; }
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .cta-actions-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .cta-actions-row .hs-form-frame {
+    width: 100%;
+  }
+
+  .faq-wrapper { background: var(--bg-light); color: var(--text-dark); }
+  .faq-wrapper .section-label { color: var(--accent-dark); }
+  .faq-wrapper h2 { color: var(--text-dark); }
+  .faq-wrapper h2 em { color: var(--accent-dark); }
+  .faq { display: grid; gap: 8px; margin-top: 24px; }
+  .faq-item { border: 1px solid var(--border-dark); border-radius: var(--radius-md); overflow: hidden; background: var(--bg-light-card); }
+  .faq-q {
+    width: 100%;
+    border: none;
+    background: none;
+    color: var(--text-dark);
+    text-align: left;
+    font-family: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+    padding: 20px 22px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .faq-q span:last-child { color: var(--accent-dark); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.25s ease; }
+  .faq-a-inner { padding: 0 22px 20px; color: var(--text-dark-secondary); font-size: 0.9rem; }
+
+  footer {
+    padding: 72px clamp(20px,4vw,40px) 84px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 28px; margin-bottom: 28px; }
+  .footer-title { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; }
+  .footer-copy { font-size: 0.9rem; color: var(--text-secondary); max-width: 40ch; line-height: 1.65; }
+  .footer-col-label { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+  .footer-links { display: flex; flex-direction: column; gap: 8px; }
+  .footer-links a { width: fit-content; font-size: 0.88rem; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text-primary); }
+  .footer-meta { padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 16px; font-size: 0.8rem; }
+  .footer-meta a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+  .footer-meta a:hover { color: var(--text-primary); }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 920px) {
+    .hero-grid,
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 900px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 74px; left: 0; right: 0;
+      background: rgba(20,20,20,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 20px clamp(20px, 4vw, 40px);
+      gap: 18px;
+    }
+    .nav-links.open { display: flex; }
+    .mobile-menu-btn { display: block; }
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 108px 0 42px; }
+    .process { padding-left: 0; }
+    .step::before { left: 14px; top: -12px; }
+    .step { padding-top: 26px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+    .footer-meta { flex-direction: column; }
+    .cta-actions-row { flex-direction: column; width: 100%; }
+    .btn-primary, .btn-secondary { width: 100%; }
+  }
+</style>
+
+</head>
+<body>
+
+<nav aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/homepage" class="nav-logo">Branch <span>Road</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/brand-positioning">Brand</a></li>
+      <li><a href="/demand-generation">Demand Gen</a></li>
+      <li><a href="/explainer-video-production" aria-current="page">Video</a></li>
+      <li><a href="/search-visibility">Search</a></li>
+      <li><a href="/social-distribution">Social</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="3" width="22" height="2" rx="1" fill="currentColor"/><rect y="10" width="22" height="2" rx="1" fill="currentColor"/><rect y="17" width="22" height="2" rx="1" fill="currentColor"/></svg>
+    </button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow">Explainer Video Production</div>
+      <h1>Explainer videos that make complex  products easy to buy</h1>
+      <p class="hero-sub">
+        We help B2B tech teams explain complex products in plain language. The result is video content your audience can understand quickly and your team can reuse across web, campaigns, and sales conversations.
+      </p>
+    </div>
+    <aside class="hero-card reveal">
+      <div class="hero-media">
+        <video src="https://www.dropbox.com/scl/fi/j0pfd6vo5iita38ul666m/Appear_X5-Animation_FINAL.mp4?rlkey=3bpay7baveneb5wedhfzo7tfi&st=b8opg8mc&raw=1" autoplay muted loop playsinline></video>
+      </div>
+      <div class="hero-card-body">
+        <h2>Example explainer</h2>
+        <p class="hero-card-copy">A reference clip showing the style, pace, and clarity we aim for in product explainers.</p>
+        <div class="hero-example-tags">
+          <span>Live action + graphics</span>
+          <span>Campaign-ready versions</span>
+        </div>
+        <div class="hero-price-panel">
+          <div class="hero-price-label">Process starting from</div>
+          <div class="hero-price-value">$XXX</div>
+          <p class="hero-price-copy">Scope, scripting, and delivery planning before production begins.</p>
+        </div>
+        <div class="hero-card-action">
+          <a href="#contact" class="btn-primary">Let's talk explainers -></a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<main>
+  <section class="block" id="types">
+    <div class="container reveal">
+      <div class="section-head">
+        <div class="section-label">Flavours of explainers</div>
+        <h2>An explainer for any occasion</h2>
+      </div>
+      <div class="grid-2">
+        <article class="card">
+          <div class="type-example">
+            <video src="https://www.dropbox.com/scl/fi/go209g9s79kld20d17i55/2025-video-marketing-trends.mov?rlkey=xievn2hx77q7ileuepdhq70kz&st=9tbsckum&raw=1" autoplay muted loop playsinline></video>
+            <span class="type-example-label">Editorial explainer style</span>
+          </div>
+          <h3>2025 Video Marketing Trends</h3>
+          <p>A strong reference for narrative-led explainers that combine opinion, insight, and clear framing for thought-leadership audiences.</p>
+        </article>
+        <article class="card">
+          <div class="type-example">
+            <video src="https://www.dropbox.com/scl/fi/j0pfd6vo5iita38ul666m/Appear_X5-Animation_FINAL.mp4?rlkey=3bpay7baveneb5wedhfzo7tfi&st=b8opg8mc&raw=1" autoplay muted loop playsinline></video>
+            <span class="type-example-label">Motion-first explainer</span>
+          </div>
+          <h3>Appear X5 Animation</h3>
+          <p>A clear fit for animation-heavy explainers where product capabilities, systems, or technical value are best communicated through motion graphics.</p>
+        </article>
+        <article class="card">
+          <div class="type-example">
+            <video src="https://www.dropbox.com/scl/fi/m3gpi51l9vl5h5xr6jiy5/Keysight-V02c.mp4?rlkey=tj54lldq7opkxkqmzg755pfmq&st=jaktenw5&raw=1" autoplay muted loop playsinline></video>
+            <span class="type-example-label">Product + platform explainer</span>
+          </div>
+          <h3>Keysight V02c</h3>
+          <p>A useful model for explainers that balance product context, platform value, and campaign-ready storytelling in one concise edit.</p>
+        </article>
+        <article class="card">
+          <div class="type-example">
+            <video src="https://www.dropbox.com/scl/fi/xw1s25xwccwz7o451w4vq/Interos-v5-FINAL.mp4?rlkey=icevwnejex7aivjzybriwtxf9&st=ri9b89mm&raw=1" autoplay muted loop playsinline></video>
+            <span class="type-example-label">Enterprise narrative explainer</span>
+          </div>
+          <h3>Interos v5 Final</h3>
+          <p>A reference for high-trust enterprise explainers that simplify complex risk or operations narratives without losing strategic depth.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="process-wrapper">
+    <section class="block" id="process">
+      <div class="container reveal">
+        <div class="section-head">
+          <div class="section-label">Our process</div>
+          <h2>How we build explainer videos from <em>brief to delivery</em></h2>
+        </div>
+        <div class="process">
+          <article class="step reveal">
+            <div class="step-tag">Discover</div>
+            <h3>Strategy and scriptwriting</h3>
+            <p>We align on audience, messaging, and objectives, then build a script around the decisions your buyer needs to make.</p>
+          </article>
+          <article class="step reveal">
+            <div class="step-tag">Design</div>
+            <h3>Storyboard and pre-production</h3>
+            <p>We shape visual direction, pacing, and format before production starts so feedback happens early and efficiently.</p>
+          </article>
+          <article class="step reveal">
+            <div class="step-tag">Produce</div>
+            <h3>Production and post-production</h3>
+            <p>We produce in the agreed format - live action, animation, or hybrid - then edit for clarity and consistency.</p>
+          </article>
+          <article class="step reveal">
+            <div class="step-tag">Deploy</div>
+            <h3>Versioning and handoff</h3>
+            <p>We deliver your core explainer plus channel-specific versions for web, paid, and sales use.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<div class="container" id="contact">
+  <section class="cta reveal" aria-label="Contact call to action">
+    <h2>Ready to start your explainer?</h2>
+    <p>Complete the form and we'll come back to you within 48 hours with next steps.</p>
+    <div class="cta-actions">
+      <div class="cta-actions-row">
+        <script src="https://js.hsforms.net/forms/embed/5554356.js" defer></script>
+        <div class="hs-form-frame" data-region="na1" data-form-id="0663b756-0cfc-40ba-8327-48840ca61121" data-portal-id="5554356"></div>
+      </div>
+      <a href="https://br-video-services-page.netlify.app/" class="btn-secondary">See other video services</a>
+    </div>
+  </section>
+</div>
+
+<div class="faq-wrapper">
+  <section class="block" id="faq">
+    <div class="container reveal">
+      <div class="section-head">
+        <div class="section-label">FAQs</div>
+        <h2>Common questions about <em>explainer video production</em></h2>
+      </div>
+      <div class="faq">
+        <article class="faq-item">
+          <button class="faq-q" data-faq-toggle><span>What is included in your explainer video production service?</span><span>+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Everything required for a finished asset: strategy, scriptwriting, storyboarding, production, editing, subtitles, branded graphics, and music licensing.</div></div>
+        </article>
+        <article class="faq-item">
+          <button class="faq-q" data-faq-toggle><span>Do you produce animated explainer videos and live-action explainers?</span><span>+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. We recommend live action, animation, or hybrid formats based on your audience, product complexity, and campaign objective.</div></div>
+        </article>
+        <article class="faq-item">
+          <button class="faq-q" data-faq-toggle><span>How long does a typical explainer project take?</span><span>+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Most projects take 3-6 weeks. Timeline depends on complexity, approvals, and the number of versions needed.</div></div>
+        </article>
+        <article class="faq-item">
+          <button class="faq-q" data-faq-toggle><span>Can you work with our internal team and fixed budget?</span><span>+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. We regularly collaborate with internal teams and can scope clear options around fixed budgets.</div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-title">What's your story?</div>
+      <p class="footer-copy">We make strategic B2B video content for teams that need ideas, execution, and consistent output without bloated production overhead.</p>
+    </div>
+    <div>
+      <div class="footer-col-label">Company</div>
+      <div class="footer-links">
+        <a href="https://branchroad.media/services/">Services</a>
+        <a href="https://branchroad.media/case-studies/">Case studies</a>
+        <a href="https://branchroad.media/about/">About</a>
+        <a href="https://branchroad.media/blog/">Blog</a>
+        <a href="https://branchroad.media/careers/">Careers</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-label">Contact</div>
+      <div class="footer-links">
+        <a href="https://branchroad.media/contact/">Get in touch</a>
+        <a href="mailto:hello@branchroad.media">hello@branchroad.media</a>
+        <a href="https://www.linkedin.com/company/branch-road-media/">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <span>(c) Branch Road 2026</span>
+    <span><a href="https://branchroad.media/privacy-policy/">Privacy policy</a> | <a href="https://extract.studio/">Site credits</a></span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+  document.querySelectorAll('[data-faq-toggle]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const item = button.closest('.faq-item');
+      const answer = item.querySelector('.faq-a');
+      const isOpen = item.classList.contains('open');
+
+      document.querySelectorAll('.faq-item.open').forEach((openItem) => {
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-a').style.maxHeight = '0';
+        openItem.querySelector('.faq-q span:last-child').textContent = '+';
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        item.querySelector('.faq-q span:last-child').textContent = '-';
+      }
+    });
+  });
+
+  const btn = document.getElementById('mobile-menu-btn');
+  const links = document.getElementById('nav-links');
+  if (btn && links) {
+    btn.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  }
+</script>
+</body>
+</html>
