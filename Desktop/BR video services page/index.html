@@ -423,8 +423,13 @@
   @media (max-width: 960px) {
     .testimonials { grid-template-columns: 1fr; }
   }
-
   @media (max-width: 640px) {
+    .hero-headline { font-size: 2.4rem; }
+    .service-row { grid-template-columns: 48px 1fr; }
+    .service-right { display: none; }
+    .service-row:hover .service-hook,
+    .service-row:hover .service-arrow { opacity: 0; }
+    .conviction-statement { font-size: 1.8rem; }
     .nav-links {
       display: none;
       flex-direction: column;
