@@ -1871,6 +1871,60 @@
     margin-bottom: 14px;
     line-height: 1.35;
   }
+  .gate-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .gate-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .gate-field label {
+    font-size: 0.72rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    color: var(--text-light);
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+  .gate-field input {
+    padding: 10px 14px;
+    border: 1.5px solid rgba(107,45,139,0.2);
+    border-radius: 8px;
+    font-family: 'Polymath Text', 'Outfit', sans-serif;
+    font-size: 0.88rem;
+    color: var(--text);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .gate-field input::placeholder { color: #bbb; }
+  .gate-field input:focus { border-color: var(--purple); }
+  .gate-field input.error { border-color: var(--coral); }
+  .gate-submit-btn {
+    width: 100%;
+    background: var(--plum);
+    color: var(--white);
+    font-family: 'Polymath Text', 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .gate-submit-btn:hover {
+    background: var(--purple);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(107,45,139,0.3);
+  }
+  @media (max-width: 580px) {
+    .gate-form-grid { grid-template-columns: 1fr; }
+  }
   .gate-success {
     display: none;
     padding: 14px 18px;
@@ -1996,10 +2050,25 @@
             <div class="gate-form">
               <p class="gate-headline">Unlock your full results + our AI Playbook for Accounting — free</p>
               <div id="gate-email-form">
-                <div class="email-capture">
-                  <input type="email" id="gate-email-input" placeholder="you@company.com" aria-label="Work email address">
-                  <button onclick="handleGateSubmit()">Unlock My Results</button>
+                <div class="gate-form-grid">
+                  <div class="gate-field">
+                    <label for="gate-firstname">First name</label>
+                    <input type="text" id="gate-firstname" placeholder="Jane" autocomplete="given-name">
+                  </div>
+                  <div class="gate-field">
+                    <label for="gate-lastname">Last name</label>
+                    <input type="text" id="gate-lastname" placeholder="Smith" autocomplete="family-name">
+                  </div>
+                  <div class="gate-field">
+                    <label for="gate-email-input">Work email</label>
+                    <input type="email" id="gate-email-input" placeholder="jane@company.com" autocomplete="email">
+                  </div>
+                  <div class="gate-field">
+                    <label for="gate-company">Company</label>
+                    <input type="text" id="gate-company" placeholder="Acme Inc." autocomplete="organization">
+                  </div>
                 </div>
+                <button class="gate-submit-btn" onclick="handleGateSubmit()">Unlock My Results</button>
                 <div class="email-capture-note">No spam. Unsubscribe anytime.</div>
               </div>
               <div class="gate-success" id="gate-success">✓ Unlocking your results…</div>
@@ -2630,20 +2699,45 @@ function updateProgress() {
   document.getElementById('progress-fill').style.width = ((current + 1) / questions.length * 100) + '%';
 }
 
-function submitEmail(email) {
-  // In production, POST to your form handler / CRM
-  console.log('Email captured:', email);
+const HUBSPOT_PORTAL_ID = 'YOUR_PORTAL_ID';
+const HUBSPOT_FORM_GUID  = 'YOUR_FORM_GUID';
+
+function submitToHubSpot(data) {
+  if (HUBSPOT_PORTAL_ID === 'YOUR_PORTAL_ID') return;
+  fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_GUID}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      fields: [
+        { objectTypeId: '0-1', name: 'firstname', value: data.firstname },
+        { objectTypeId: '0-1', name: 'lastname',  value: data.lastname  },
+        { objectTypeId: '0-1', name: 'email',     value: data.email     },
+        { objectTypeId: '0-1', name: 'company',   value: data.company   },
+      ],
+      context: { pageUri: window.location.href, pageName: document.title },
+    }),
+  }).catch(() => {});
 }
 
 function handleGateSubmit() {
-  const input = document.getElementById('gate-email-input');
-  const email = input.value.trim();
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    input.style.borderColor = 'var(--coral)';
-    input.focus();
-    return;
-  }
-  submitEmail(email);
+  const fieldDefs = [
+    { id: 'gate-firstname',   key: 'firstname' },
+    { id: 'gate-lastname',    key: 'lastname'  },
+    { id: 'gate-email-input', key: 'email',    isEmail: true },
+    { id: 'gate-company',     key: 'company'   },
+  ];
+  const values = {};
+  let firstInvalid = null;
+  fieldDefs.forEach(({ id, key, isEmail }) => {
+    const el = document.getElementById(id);
+    const val = el.value.trim();
+    const ok = val && (!isEmail || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val));
+    el.classList.toggle('error', !ok);
+    if (!ok && !firstInvalid) firstInvalid = el;
+    values[key] = val;
+  });
+  if (firstInvalid) { firstInvalid.focus(); return; }
+  submitToHubSpot(values);
   document.getElementById('gate-email-form').style.display = 'none';
   document.getElementById('gate-success').style.display = 'block';
   setTimeout(() => {
