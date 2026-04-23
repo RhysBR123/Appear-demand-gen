@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pipeline Doesn't Build Itself | Branch Road × Appear</title>
+  <meta name="description" content="A demand generation briefing for Appear — what it takes to build a programme generating real, qualified pipeline before September 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+
+/* ═══════════════════════════════════
+   TOKENS
+═══════════════════════════════════ */
+:root {
+  --bg:        #FAFAF9;
+  --bg-tint:   #F5F0FF;
+  --white:     #FFFFFF;
+  --border-l:  rgba(20,8,38,0.08);
+
+  --hot:       #ff1396;
+  --hot-d:     #cc0f78;
+  --hot-bg:    rgba(255,19,150,0.07);
+
+  --teal:      #01FEE5;
+  --teal-d:    #00C9B5;
+  --teal-bg:   rgba(1,254,229,0.08);
+  --teal-glow: rgba(1,254,229,0.18);
+
+  --violet:    #7c1fff;
+  --coral:     #FF5A3C;
+  --coral-bg:  rgba(255,90,60,0.06);
+
+  --navy:      #0D0618;
+  --navy-2:    #0f0520;
+  --dark:      #140826;
+  --body:      #4e4268;
+  --muted:     rgba(78,66,104,0.58);
+
+  --w100: rgba(255,255,255,1);
+  --w70:  rgba(255,255,255,0.7);
+  --w50:  rgba(255,255,255,0.5);
+  --w30:  rgba(255,255,255,0.3);
+  --w12:  rgba(255,255,255,0.12);
+  --w06:  rgba(255,255,255,0.06);
+
+  --font: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --r:    20px;
+  --r-sm: 14px;
+  --r-pill: 100px;
+  --sh:   0 2px 16px rgba(20,8,38,0.07);
+  --sh-lg:0 8px 40px rgba(20,8,38,0.12);
+  --max-w:1080px;
+}
+
+/* ═══════════════════════════════════
+   RESET
+═══════════════════════════════════ */
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--dark);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+
+/* ═══════════════════════════════════
+   LAYOUT
+═══════════════════════════════════ */
+.wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 clamp(24px,5vw,64px); }
+
+/* ═══════════════════════════════════
+   NAV
+═══════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px clamp(24px,5vw,64px);
+  background: rgba(13,6,24,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--w06);
+}
+.nav-logo {
+  font-size: 12px; font-weight: 800; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--teal); text-decoration: none;
+}
+.nav-pill {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: var(--r-pill);
+  background: var(--hot-bg); border: 1px solid rgba(255,19,150,0.22);
+  color: var(--hot);
+}
+
+/* ═══════════════════════════════════
+   BEAT ANIMATION SYSTEM
+═══════════════════════════════════ */
+.beat {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.72s ease, transform 0.72s ease;
+}
+.beat.in { opacity: 1; transform: none; }
+
+.beat-scale {
+  opacity: 0;
+  transform: scale(0.84);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.34,1.56,0.64,1);
+}
+.beat-scale.in { opacity: 1; transform: scale(1); }
+
+.beat-left {
+  opacity: 0; transform: translateX(-28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.beat-left.in { opacity: 1; transform: none; }
+
+.d1 { transition-delay: 0.10s; }
+.d2 { transition-delay: 0.22s; }
+.d3 { transition-delay: 0.34s; }
+.d4 { transition-delay: 0.46s; }
+
+/* Hero sequence beats */
+.hbeat { opacity: 0; transform: translateY(22px); transition: opacity 0.68s ease, transform 0.68s ease; }
+.hbeat.in { opacity: 1; transform: none; }
+
+/* ═══════════════════════════════════
+   S0 — HERO
+═══════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--navy);
+  position: relative; overflow: hidden;
+  padding: 100px clamp(24px,5vw,64px) 80px;
+  text-align: center;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 25%, rgba(1,254,229,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 35% 28% at 15% 80%, rgba(255,19,150,0.05) 0%, transparent 55%),
+    radial-gradient(ellipse 30% 25% at 85% 75%, rgba(124,31,255,0.06) 0%, transparent 55%);
+}
+.hero-inner { position: relative; z-index: 1; max-width: 780px; }
+
+.hero-eyebrow {
+  display: block;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 32px;
+}
+.hero-h1 {
+  font-size: clamp(46px,7.5vw,94px);
+  font-weight: 800; letter-spacing: -0.035em; line-height: 1.0;
+  color: var(--w100); margin-bottom: 36px;
+}
+.hero-lead {
+  font-size: clamp(16px,1.9vw,20px); line-height: 1.78;
+  color: var(--w50); max-width: 580px; margin: 0 auto 52px;
+}
+.hero-lead strong { color: var(--w70); font-weight: 600; }
+.hero-scroll {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--teal); opacity: 0.65;
+}
+.hero-arrow { font-size: 18px; animation: arrowBounce 2s ease-in-out infinite; }
+@keyframes arrowBounce {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(7px); }
+}
+
+/* ═══════════════════════════════════
+   S1 — THE FOUNDATION
+═══════════════════════════════════ */
+.s1 {
+  background: var(--bg);
+  padding: clamp(80px,11vw,140px) 0;
+}
+.s1-center {
+  text-align: center;
+  padding: 0 clamp(24px,5vw,64px);
+  margin-bottom: 64px;
+}
+.s1-h {
+  font-size: clamp(34px,5vw,62px);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+  color: var(--dark); margin-bottom: 28px;
+  max-width: 16ch; margin-left: auto; margin-right: auto;
+}
+.s1-context {
+  font-size: clamp(15px,1.6vw,17px); line-height: 1.82;
+  color: var(--muted); max-width: 560px;
+  margin: 0 auto 28px;
+}
+.s1-bridge {
+  display: block;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--teal-d);
+}
+
+/* Foundation checklist */
+.foundation-list {
+  max-width: 720px; margin: 0 auto;
+  padding: 0 clamp(24px,5vw,64px);
+}
+.fi {
+  display: flex; gap: 22px; align-items: flex-start;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--border-l);
+  opacity: 0; transform: translateY(22px);
+  transition: opacity 0.62s ease, transform 0.62s ease;
+}
+.fi:last-child { border-bottom: none; }
+.fi.in { opacity: 1; transform: none; }
+.fi-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--teal); flex-shrink: 0; margin-top: 7px;
+  box-shadow: 0 0 12px var(--teal-glow);
+}
+.fi-text {
+  font-size: clamp(14px,1.5vw,16px); line-height: 1.78; color: var(--body);
+}
+.fi-text strong { color: var(--dark); font-weight: 700; }
+
+/* ═══════════════════════════════════
+   S2 — SAMSARA CASE STUDY
+═══════════════════════════════════ */
+.s2 {
+  background: var(--navy);
+  padding: clamp(80px,11vw,140px) 0;
+}
+.s2-eyebrow {
+  display: block; text-align: center;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 28px;
+}
+.s2-h1 {
+  font-size: clamp(38px,6vw,76px);
+  font-weight: 800; letter-spacing: -0.035em; line-height: 1.05;
+  color: var(--w100); text-align: center; margin-bottom: 4px;
+}
+.s2-h2 {
+  font-size: clamp(38px,6vw,76px);
+  font-weight: 800; letter-spacing: -0.035em; line-height: 1.05;
+  color: var(--teal); text-align: center; margin-bottom: 40px;
+}
+.s2-context {
+  font-size: clamp(14px,1.5vw,16px); line-height: 1.82;
+  color: var(--w50); text-align: center;
+  max-width: 520px; margin: 0 auto 72px;
+}
+
+/* Stats */
+.stats-row {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 14px; margin-bottom: 40px;
+}
+.stat-card {
+  background: var(--w06);
+  border: 1px solid var(--w12);
+  border-radius: var(--r); padding: 28px 20px;
+  text-align: center;
+}
+.stat-num {
+  font-size: clamp(26px,3.5vw,40px); font-weight: 900;
+  letter-spacing: -0.03em; color: var(--teal); line-height: 1;
+  margin-bottom: 10px;
+}
+.stat-label { font-size: 13px; font-weight: 600; color: var(--w50); line-height: 1.4; margin-bottom: 5px; }
+.stat-target { font-size: 11px; color: var(--w30); }
+
+.spend-note {
+  text-align: center; font-size: 14px; line-height: 1.72;
+  color: var(--w30); max-width: 560px; margin: 0 auto 72px;
+}
+.spend-note strong { color: var(--w50); }
+
+/* Flow diagram */
+.flow-wrap {
+  background: var(--w06); border: 1px solid var(--w12);
+  border-radius: 24px; padding: clamp(32px,4vw,52px) clamp(24px,4vw,48px);
+  margin-bottom: 14px; overflow: hidden;
+}
+.flow-diagram {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; overflow-x: auto; padding-bottom: 4px;
+}
+.flow-node {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  flex-shrink: 0; min-width: 88px;
+}
+.flow-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: var(--teal-bg); border: 1px solid rgba(1,254,229,0.22);
+  display: flex; align-items: center; justify-content: center;
+}
+.flow-icon svg { width: 22px; height: 22px; stroke: var(--teal); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.flow-label { font-size: 11px; font-weight: 600; color: var(--w50); text-align: center; line-height: 1.35; max-width: 72px; }
+.flow-arr {
+  width: 28px; flex-shrink: 0; text-align: center;
+  color: rgba(1,254,229,0.35); font-size: 16px; font-weight: 700;
+  margin-top: -20px; user-select: none;
+}
+.flow-caption {
+  text-align: center; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--w30); margin-top: 28px;
+}
+
+/* Transition line */
+.s2-bridge {
+  text-align: center; font-size: 12px; color: var(--w30);
+  margin-bottom: 40px; font-style: italic;
+}
+
+/* Deliverable cards */
+.deliverable-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 14px;
+}
+.del-card {
+  background: var(--w06); border: 1px solid var(--w12);
+  border-radius: var(--r); padding: 32px 26px;
+}
+.del-label {
+  display: block; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 18px;
+  padding-bottom: 14px; border-bottom: 1px solid var(--w12);
+}
+.del-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.del-list li {
+  font-size: 13px; line-height: 1.6; color: var(--w50);
+  padding-left: 14px; position: relative;
+}
+.del-list li::before {
+  content: '·'; position: absolute; left: 0;
+  color: var(--teal); font-weight: 700;
+}
+
+/* ═══════════════════════════════════
+   S3 — OTHER CLIENTS
+═══════════════════════════════════ */
+.s3 {
+  background: var(--bg);
+  padding: clamp(80px,11vw,140px) 0;
+}
+.s3-eyebrow {
+  display: block; text-align: center;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--hot); margin-bottom: 20px;
+}
+.s3-h {
+  font-size: clamp(34px,4.5vw,58px);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+  color: var(--dark); text-align: center; margin-bottom: 16px;
+}
+.s3-lead {
+  font-size: clamp(15px,1.6vw,17px); color: var(--muted);
+  text-align: center; max-width: 440px; margin: 0 auto 14px;
+}
+.s3-sub {
+  font-size: clamp(16px,1.7vw,18px); font-weight: 700;
+  color: var(--dark); text-align: center; margin-bottom: 60px; font-style: italic;
+}
+
+.client-stack { display: flex; flex-direction: column; gap: 20px; }
+
+.client-card {
+  background: var(--white);
+  border: 1px solid var(--border-l);
+  border-radius: 24px; overflow: hidden;
+  box-shadow: var(--sh);
+}
+.client-strip {
+  height: 108px; display: flex; gap: 2px; overflow: hidden;
+}
+.client-strip-block {
+  flex: 1; display: flex; align-items: flex-end;
+  padding: 10px 12px; position: relative; overflow: hidden;
+}
+.client-strip-block::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 60%);
+}
+.client-strip-lbl {
+  position: relative; z-index: 1;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.7);
+}
+.client-body { padding: 32px 36px; }
+.client-name { font-size: clamp(19px,2vw,24px); font-weight: 800; letter-spacing: -0.02em; color: var(--dark); margin-bottom: 4px; }
+.client-hook { font-size: 13px; font-weight: 600; color: var(--hot); margin-bottom: 14px; }
+.client-desc { font-size: 14px; line-height: 1.8; color: var(--body); margin-bottom: 20px; }
+.client-results { display: flex; flex-wrap: wrap; gap: 8px; }
+.client-result {
+  padding: 5px 13px; border-radius: var(--r-pill);
+  background: var(--hot-bg); border: 1px solid rgba(255,19,150,0.18);
+  font-size: 12px; font-weight: 700; color: var(--hot);
+}
+
+/* ═══════════════════════════════════
+   S4 — RECOMMENDATIONS
+═══════════════════════════════════ */
+.s4 {
+  background: var(--navy-2);
+  padding: clamp(80px,11vw,140px) 0;
+}
+.s4-eyebrow {
+  display: block; text-align: center;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--hot); margin-bottom: 20px;
+}
+.s4-h {
+  font-size: clamp(32px,4.5vw,56px);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+  color: var(--w100); text-align: center; margin-bottom: 16px;
+}
+.s4-lead {
+  font-size: clamp(14px,1.5vw,16px); font-style: italic;
+  color: var(--w30); text-align: center;
+  max-width: 340px; margin: 0 auto 72px;
+}
+
+.recs { max-width: 800px; margin: 0 auto; padding: 0 clamp(24px,5vw,64px); }
+
+.rec {
+  display: grid; grid-template-columns: 72px 1fr;
+  gap: 28px; padding: 40px 0;
+  border-bottom: 1px solid var(--w06);
+}
+.rec:last-child { border-bottom: none; }
+.rec-num {
+  font-size: clamp(42px,5.5vw,60px); font-weight: 900;
+  letter-spacing: -0.04em; line-height: 1;
+  color: var(--teal); opacity: 0.65;
+  padding-top: 2px;
+}
+.rec-title {
+  font-size: clamp(16px,1.9vw,20px); font-weight: 700;
+  letter-spacing: -0.015em; line-height: 1.3;
+  color: var(--w100); margin-bottom: 14px;
+}
+.rec-body {
+  font-size: clamp(13px,1.4vw,15px); line-height: 1.82;
+  color: var(--w50);
+}
+
+.rec-callout {
+  background: var(--coral-bg);
+  border: 1px solid rgba(255,90,60,0.22);
+  border-left: 3px solid var(--coral);
+  border-radius: var(--r); padding: 30px 32px;
+  margin: 8px 0;
+}
+.rec-callout p {
+  font-size: clamp(14px,1.5vw,16px); line-height: 1.82;
+  color: rgba(255,255,255,0.68);
+}
+.rec-callout p strong { color: rgba(255,220,200,0.92); font-weight: 700; }
+
+/* ═══════════════════════════════════
+   S5 — CTA BRIDGE
+═══════════════════════════════════ */
+.s5 {
+  min-height: 80vh;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: clamp(80px,12vw,160px) clamp(24px,5vw,64px);
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.s5::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 40% at 50% 60%, rgba(1,254,229,0.05) 0%, transparent 60%);
+}
+.s5-inner { position: relative; z-index: 1; }
+.s5-eyebrow {
+  display: block;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--hot); margin-bottom: 24px;
+}
+.s5-h {
+  font-size: clamp(36px,5.5vw,66px);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+  color: var(--dark); max-width: 14ch; margin: 0 auto 24px;
+}
+.s5-lead {
+  font-size: clamp(15px,1.7vw,18px); line-height: 1.75;
+  color: var(--muted); max-width: 400px; margin: 0 auto 52px;
+}
+.teal-rule {
+  height: 2px; width: 0;
+  background: linear-gradient(90deg, var(--teal), var(--teal-d));
+  border-radius: 2px; margin: 0 auto;
+  transition: width 1.1s cubic-bezier(0.16,1,0.3,1);
+}
+.teal-rule.in { width: 260px; }
+
+/* ═══════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+.footer {
+  background: var(--navy);
+  padding: clamp(60px,8vw,100px) 0 40px;
+  border-top: 1px solid var(--w06);
+}
+.footer-eyebrow {
+  display: block; text-align: center;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--w30); margin-bottom: 40px;
+}
+.contact-row {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 16px; margin-bottom: 52px;
+}
+.contact-card {
+  background: var(--w06); border: 1px solid var(--w12);
+  border-radius: var(--r); padding: 28px 24px;
+}
+.contact-av {
+  width: 52px; height: 52px; border-radius: 50%;
+  object-fit: cover; border: 2px solid rgba(1,254,229,0.2);
+  margin-bottom: 16px; display: block;
+}
+.contact-init {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal), var(--violet));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 800; color: var(--navy);
+  margin-bottom: 16px;
+}
+.contact-name { font-size: 15px; font-weight: 700; color: var(--w100); margin-bottom: 4px; }
+.contact-role { font-size: 12px; color: var(--w30); margin-bottom: 14px; line-height: 1.4; }
+.contact-email {
+  font-size: 12px; font-weight: 600; color: var(--teal);
+  text-decoration: none; transition: color 0.2s;
+}
+.contact-email:hover { color: var(--hot); }
+
+.footer-bar {
+  border-top: 1px solid var(--w06); padding-top: 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-wordmark { font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--w30); }
+.footer-tag { font-size: 12px; color: var(--w30); }
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+@media (max-width: 960px) {
+  .stats-row { grid-template-columns: repeat(2,1fr); }
+  .deliverable-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .contact-row { grid-template-columns: 1fr; }
+  .rec { grid-template-columns: 52px 1fr; gap: 18px; }
+  .client-body { padding: 24px; }
+  .flow-diagram { justify-content: flex-start; }
+}
+@media (max-width: 540px) {
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .client-strip { height: 80px; }
+}
+
+/* ═══════════════════════════════════
+   REDUCED MOTION
+═══════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .beat, .beat-scale, .beat-left, .hbeat, .fi, .rec, .rec-callout, .teal-rule {
+    transition-duration: 0.2s !important;
+  }
+  .beat, .beat-scale, .beat-left, .hbeat, .fi, .rec, .rec-callout {
+    transform: none !important;
+  }
+  .hero-arrow { animation: none; }
+}
+
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" aria-label="Site navigation">
+  <a href="https://branchroad.media" class="nav-logo" target="_blank" rel="noopener">Branch Road</a>
+  <span class="nav-pill" aria-label="Context">Appear · April 2026</span>
+</nav>
+
+
+<!-- ══════════════════════════════════════
+     S0 · HERO
+══════════════════════════════════════ -->
+<section class="hero" id="top" aria-labelledby="hero-h1">
+  <div class="hero-inner">
+    <span class="hero-eyebrow hbeat" id="hb0">Demand Generation — April 2026</span>
+
+    <h1 class="hero-h1 hbeat" id="hero-h1" style="transition-delay:0.28s">
+      Pipeline doesn't<br>build itself.
+    </h1>
+
+    <p class="hero-lead hbeat" style="transition-delay:0.56s">
+      September 2026. <strong>Five months</strong> to build a demand gen programme generating real, qualified pipeline — not vanity metrics, but opportunities Sales can close.
+    </p>
+
+    <div class="hero-scroll hbeat" style="transition-delay:0.84s" aria-hidden="true">
+      <span>Here's what that takes.</span>
+      <span class="hero-arrow">↓</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     S1 · THE FOUNDATION
+══════════════════════════════════════ -->
+<section class="s1" id="foundation" aria-labelledby="s1-h">
+  <div class="s1-center">
+    <h2 class="s1-h beat" id="s1-h">
+      Get the foundations wrong<br>and nothing else matters.
+    </h2>
+    <p class="s1-context beat d1">
+      Most demand gen programmes fail before launch. Not because the ads are bad — because nobody agreed on what a good lead looks like, Sales weren't in the room, and there's no system for learning what's working.
+    </p>
+    <span class="s1-bridge beat d2">This is what separates pipeline from PowerPoint.</span>
+  </div>
+
+  <div class="foundation-list" id="fi-list">
+
+    <div class="fi">
+      <div class="fi-dot" aria-hidden="true"></div>
+      <p class="fi-text"><strong>A clearly defined ICP</strong> — who you're selling to, what a good lead looks like, agreed MQL and SQL definitions. If Marketing and Sales are working off different definitions, you're already losing.</p>
+    </div>
+
+    <div class="fi">
+      <div class="fi-dot" aria-hidden="true"></div>
+      <p class="fi-text"><strong>Sales buy-in on messaging</strong> — not a courtesy CC on the brief. Sales need to be equipped to use what Marketing puts into market, or it dies on arrival.</p>
+    </div>
+
+    <div class="fi">
+      <div class="fi-dot" aria-hidden="true"></div>
+      <p class="fi-text"><strong>Marketing and Sales alignment</strong> — shared framework, clean handoff, SLA on lead response time. No grey areas.</p>
+    </div>
+
+    <div class="fi">
+      <div class="fi-dot" aria-hidden="true"></div>
+      <p class="fi-text"><strong>Lead scoring</strong> — so Sales sees leads ready for a conversation, not everyone who downloaded a PDF.</p>
+    </div>
+
+    <div class="fi">
+      <div class="fi-dot" aria-hidden="true"></div>
+      <p class="fi-text"><strong>A feedback loop on lead quality</strong> — structured input from Sales on what's converting, so targeting sharpens over time instead of stagnating.</p>
+    </div>
+
+    <div class="fi">
+      <div class="fi-dot" aria-hidden="true"></div>
+      <p class="fi-text"><strong>Tracking and reporting infrastructure</strong> — UTM tagging, campaign attribution, closed-loop reporting. If you can't trace a closed deal back to the campaign that sourced it, you're guessing.</p>
+    </div>
+
+    <div class="fi">
+      <div class="fi-dot" aria-hidden="true"></div>
+      <p class="fi-text"><strong>Dedicated optimisation resource</strong> — campaigns don't run themselves. Someone watches the numbers and pulls the levers, every week.</p>
+    </div>
+
+    <div class="fi">
+      <div class="fi-dot" aria-hidden="true"></div>
+      <p class="fi-text"><strong>Budget and headroom to iterate</strong> — especially before September. The first version of anything is never the best.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     S2 · SAMSARA CASE STUDY
+══════════════════════════════════════ -->
+<section class="s2" id="samsara" aria-labelledby="s2-h1">
+  <div class="wrap">
+
+    <span class="s2-eyebrow beat">Demand Gen in Practice</span>
+    <h2 class="s2-h1 beat d1" id="s2-h1">They wanted £900k in pipeline.</h2>
+    <div class="s2-h2 beat d2" role="heading" aria-level="3">We delivered £1.78m.</div>
+    <p class="s2-context beat d3">
+      Samsara needed EMEA pipeline: £900k target, 12:1 MROI, three-month window. We built the entire programme and activated it full-funnel.
+    </p>
+
+    <!-- Stats -->
+    <div class="stats-row" id="stats-row" role="list">
+      <div class="stat-card beat-scale" role="listitem">
+        <div class="stat-num">£1.78m</div>
+        <div class="stat-label">Pipeline generated</div>
+        <div class="stat-target">Target: £900k</div>
+      </div>
+      <div class="stat-card beat-scale d1" role="listitem">
+        <div class="stat-num">24.5:1</div>
+        <div class="stat-label">Return on investment</div>
+        <div class="stat-target">Target: 12:1</div>
+      </div>
+      <div class="stat-card beat-scale d2" role="listitem">
+        <div class="stat-num">4m 50s</div>
+        <div class="stat-label">Avg. microsite dwell time</div>
+        <div class="stat-target">Target: 3+ min</div>
+      </div>
+      <div class="stat-card beat-scale d3" role="listitem">
+        <div class="stat-num">3.45%</div>
+        <div class="stat-label">Conversion to completion</div>
+        <div class="stat-target">Target: 3%</div>
+      </div>
+    </div>
+
+    <p class="spend-note beat">
+      Total spend: <strong>£75,000.</strong> Production: <strong>£50,050.</strong> Paid: <strong>~£23,000.</strong>
+      Most B2B marketers would take a 5:1 return and celebrate.
+    </p>
+
+    <!-- Campaign flow -->
+    <div class="flow-wrap beat" aria-label="Full-funnel campaign architecture diagram">
+      <div class="flow-diagram">
+
+        <div class="flow-node">
+          <div class="flow-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none" style="color:var(--teal)"/></svg>
+          </div>
+          <div class="flow-label">Video Production</div>
+        </div>
+
+        <div class="flow-arr" aria-hidden="true">›</div>
+
+        <div class="flow-node">
+          <div class="flow-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 11.5 19.79 19.79 0 01.88 2.82 2 2 0 012.87.64h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 8.3A16 16 0 0015.71 16.9l1.02-1.03a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div class="flow-label">LinkedIn Ads</div>
+        </div>
+
+        <div class="flow-arr" aria-hidden="true">›</div>
+
+        <div class="flow-node">
+          <div class="flow-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div class="flow-label">Microsite</div>
+        </div>
+
+        <div class="flow-arr" aria-hidden="true">›</div>
+
+        <div class="flow-node">
+          <div class="flow-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="flow-label">Email Nurture</div>
+        </div>
+
+        <div class="flow-arr" aria-hidden="true">›</div>
+
+        <div class="flow-node">
+          <div class="flow-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div class="flow-label">Gated PDF</div>
+        </div>
+
+        <div class="flow-arr" aria-hidden="true">›</div>
+
+        <div class="flow-node">
+          <div class="flow-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div class="flow-label">Sales Enablement</div>
+        </div>
+
+      </div>
+      <p class="flow-caption">Full-funnel architecture — video production through to sales enablement.</p>
+    </div>
+
+    <p class="s2-bridge beat">Here's what that programme looked like in practice.</p>
+
+    <!-- Deliverables -->
+    <div class="deliverable-grid" id="del-grid">
+
+      <div class="del-card beat-left">
+        <span class="del-label">Video &amp; Content</span>
+        <ul class="del-list">
+          <li>3× persona-targeted feature videos</li>
+          <li>Social cut-downs for corporate and exec LinkedIn</li>
+          <li>Full photography and B-roll library</li>
+          <li>Gated customer spotlight PDF</li>
+        </ul>
+      </div>
+
+      <div class="del-card beat-left d1">
+        <span class="del-label">Demand Generation</span>
+        <ul class="del-list">
+          <li>LinkedIn video ads</li>
+          <li>Promotional emails and banners</li>
+          <li>Short video preview for paid promotion</li>
+          <li>Social series — copy + graphics</li>
+          <li>Multiple email nurture series</li>
+          <li>Webinar promotions</li>
+        </ul>
+      </div>
+
+      <div class="del-card beat-left d2">
+        <span class="del-label">Sales Enablement</span>
+        <ul class="del-list">
+          <li>Campaign playbook — one page per campaign with live ads, key messaging, and follow-up templates</li>
+          <li>Sales knew exactly what was in market and how to act on it from day one</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     S3 · OTHER CLIENTS
+══════════════════════════════════════ -->
+<section class="s3" id="clients" aria-labelledby="s3-h">
+  <div class="wrap">
+
+    <span class="s3-eyebrow beat">More Proof</span>
+    <h2 class="s3-h beat d1" id="s3-h">We've done this before.<br>Repeatedly.</h2>
+    <p class="s3-lead beat d2">Different industries, different audiences, same discipline.</p>
+    <p class="s3-sub beat d3">Earn attention. Convert it into pipeline.</p>
+
+    <div class="client-stack">
+
+      <!-- Brandmovers -->
+      <div class="client-card beat" aria-label="Brandmovers case study">
+        <div class="client-strip">
+          <div class="client-strip-block" style="background:linear-gradient(140deg,#071530 0%,#0e2456 100%)">
+            <span class="client-strip-lbl">Growth Engine</span>
+          </div>
+          <div class="client-strip-block" style="background:linear-gradient(140deg,#081840 0%,#122a60 100%)">
+            <span class="client-strip-lbl">Always-On PPC</span>
+          </div>
+          <div class="client-strip-block" style="background:linear-gradient(140deg,#0a1a38 0%,#16306e 100%)">
+            <span class="client-strip-lbl">Brand Display</span>
+          </div>
+        </div>
+        <div class="client-body">
+          <div class="client-name">Brandmovers</div>
+          <div class="client-hook">They needed a growth engine. We built one.</div>
+          <p class="client-desc">No measurement architecture, no scalable acquisition model. We rebuilt their strategy from scratch, defined what success looked like, then launched always-on paid media across PPC, social, performance, and brand display.</p>
+          <div class="client-results">
+            <span class="client-result">150% YoY revenue growth</span>
+            <span class="client-result">40% drop in CPL</span>
+            <span class="client-result">5% US SOV improvement</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dropbox Business -->
+      <div class="client-card beat" aria-label="Dropbox Business case study">
+        <div class="client-strip">
+          <div class="client-strip-block" style="background:linear-gradient(140deg,#00256a 0%,#0047b3 100%)">
+            <span class="client-strip-lbl">C-Level Targeting</span>
+          </div>
+          <div class="client-strip-block" style="background:linear-gradient(140deg,#002e80 0%,#003da8 100%)">
+            <span class="client-strip-lbl">5 Industries</span>
+          </div>
+          <div class="client-strip-block" style="background:linear-gradient(140deg,#002060 0%,#003a9a 100%)">
+            <span class="client-strip-lbl">EMEA</span>
+          </div>
+        </div>
+        <div class="client-body">
+          <div class="client-name">Dropbox Business</div>
+          <div class="client-hook">C-level leads across five industries, one campaign.</div>
+          <p class="client-desc">Dropbox Business needed to engage European BoB targets across education, retail, IT, media, and construction at the C-level. We built industry-specific content and ran it through copywriting, design, video, and social promotion.</p>
+          <div class="client-results">
+            <span class="client-result">20,325 clicks</span>
+            <span class="client-result">1,084 leads</span>
+            <span class="client-result">0.49% CTR</span>
+            <span class="client-result">$150–$220 CPL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group-IB -->
+      <div class="client-card beat" aria-label="Group-IB case study">
+        <div class="client-strip">
+          <div class="client-strip-block" style="background:linear-gradient(140deg,#160830 0%,#280e50 100%)">
+            <span class="client-strip-lbl">Programmatic</span>
+          </div>
+          <div class="client-strip-block" style="background:linear-gradient(140deg,#1c0a3e 0%,#30105a 100%)">
+            <span class="client-strip-lbl">Performance</span>
+          </div>
+          <div class="client-strip-block" style="background:linear-gradient(140deg,#120636 0%,#200c48 100%)">
+            <span class="client-strip-lbl">Brand</span>
+          </div>
+        </div>
+        <div class="client-body">
+          <div class="client-name">Group-IB</div>
+          <div class="client-hook">From support act to revenue driver.</div>
+          <p class="client-desc">Ambitious growth targets, existing digital marketing that wasn't getting there. We ingested their data, identified the highest-value programmatic buys, and built a multi-channel brand and performance campaign around what the numbers actually said.</p>
+          <div class="client-results">
+            <span class="client-result">25% PPC conversion uplift</span>
+            <span class="client-result">200% lead volume increase</span>
+            <span class="client-result">34% revenue growth</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rewardian -->
+      <div class="client-card beat" aria-label="Rewardian case study">
+        <div class="client-strip">
+          <div class="client-strip-block" style="background:linear-gradient(140deg,#052218 0%,#0c3e28 100%)">
+            <span class="client-strip-lbl">US B2B</span>
+          </div>
+          <div class="client-strip-block" style="background:linear-gradient(140deg,#062a1e 0%,#0e4830 100%)">
+            <span class="client-strip-lbl">Acquisition</span>
+          </div>
+          <div class="client-strip-block" style="background:linear-gradient(140deg,#041c12 0%,#0a3622 100%)">
+            <span class="client-strip-lbl">Always-On</span>
+          </div>
+        </div>
+        <div class="client-body">
+          <div class="client-name">Rewardian</div>
+          <div class="client-hook">Sustainable growth in a market that eats its own.</div>
+          <p class="client-desc">Employee engagement is one of the most saturated US B2B verticals. Growing lead volume here means finding the gaps everyone else missed. We mapped those gaps across the acquisition funnel and built an integrated ecosystem that functions as a genuine extension of their team.</p>
+          <div class="client-results">
+            <span class="client-result">115% YoY lead growth</span>
+            <span class="client-result">65% drop in CPL</span>
+            <span class="client-result">30% conversion rate increase</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     S4 · RECOMMENDATIONS FOR APPEAR
+══════════════════════════════════════ -->
+<section class="s4" id="recommendations" aria-labelledby="s4-h">
+  <div class="wrap">
+    <span class="s4-eyebrow beat">Recommendations</span>
+    <h2 class="s4-h beat d1" id="s4-h">Six things to get right<br>before September.</h2>
+    <p class="s4-lead beat d2">Not a wish list. A priority sequence.</p>
+  </div>
+
+  <div class="recs" id="recs-list">
+
+    <div class="rec beat">
+      <div class="rec-num" aria-hidden="true">01</div>
+      <div>
+        <div class="rec-title">Refresh your Book-of-Business lists by region</div>
+        <p class="rec-body">Work with Sales leaders to update BoB lists across North America (including Canada), LATAM, EMEA, and APAC. These are the targeting foundation for everything. If they're stale, every dollar you spend on ads is aimed at the wrong person.</p>
+      </div>
+    </div>
+
+    <div class="rec beat">
+      <div class="rec-num" aria-hidden="true">02</div>
+      <div>
+        <div class="rec-title">Lock in your ICP — then hunt lookalikes</div>
+        <p class="rec-body">Agree the Ideal Customer Profile, then use it to find lookalike companies and run always-on awareness against them. This builds a constant stream of opportunities Sales doesn't have on their radar yet — across every region.</p>
+      </div>
+    </div>
+
+    <div class="rec-callout beat" role="note">
+      <p>Knowing who you're targeting is half the job. <strong>Knowing where to reach them is the other half.</strong> LinkedIn is the natural home for Appear's audience, but the best programmes don't live on one channel. Do the research — your prospects are somewhere you haven't looked yet.</p>
+    </div>
+
+    <div class="rec beat">
+      <div class="rec-num" aria-hidden="true">03</div>
+      <div>
+        <div class="rec-title">Define your top personas and tailor everything</div>
+        <p class="rec-body">Pick the two or three that matter most — Operations vs. Engineering, for example — and build distinct creative, landing pages, and nurture sequences for each. Specificity converts. Generic messaging doesn't.</p>
+      </div>
+    </div>
+
+    <div class="rec beat">
+      <div class="rec-num" aria-hidden="true">04</div>
+      <div>
+        <div class="rec-title">Audit what you already have</div>
+        <p class="rec-body">Before building anything new, take stock. A full content audit across campaigns, sales assets, videos, and collateral will surface material you can repurpose, refresh, or repackage. Saves budget, compresses your timeline.</p>
+      </div>
+    </div>
+
+    <div class="rec beat">
+      <div class="rec-num" aria-hidden="true">05</div>
+      <div>
+        <div class="rec-title">Run always-on awareness — not just seasonal surges</div>
+        <p class="rec-body">NAB matters. Events matter. But they can't carry a programme alone. Always-on awareness does three things seasonal campaigns can't: steady top-of-funnel flow, pre-loaded retargeting pools before big pushes, and momentum through the dead zones — including Q5, when most competitors go quiet.</p>
+      </div>
+    </div>
+
+    <div class="rec beat">
+      <div class="rec-num" aria-hidden="true">06</div>
+      <div>
+        <div class="rec-title">Build a campaign playbook for Sales</div>
+        <p class="rec-body">One page per campaign: which ads are running, key messages, follow-up templates. Takes an afternoon to create, transforms the Marketing-to-Sales handoff. Sales follows up with confidence from day one because they know exactly what the prospect just saw.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     S5 · CTA BRIDGE
+══════════════════════════════════════ -->
+<section class="s5" id="next-steps" aria-labelledby="s5-h">
+  <div class="s5-inner">
+    <span class="s5-eyebrow beat">Next Steps</span>
+    <h2 class="s5-h beat d1" id="s5-h">Let's build something<br>that actually works.</h2>
+    <p class="s5-lead beat d2">September's closer than it looks.<br>We're ready when you are.</p>
+    <div class="teal-rule" id="teal-rule" role="separator" aria-hidden="true"></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <span class="footer-eyebrow">Branch Road — Get in touch</span>
+
+    <div class="contact-row">
+
+      <div class="contact-card beat">
+        <img src="https://branchroad.media/wp-content/uploads/2023/05/Branch-Road-Simon.jpeg"
+             alt="Simon Cliffe" class="contact-av"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="contact-init" style="display:none" aria-hidden="true">SC</div>
+        <div class="contact-name">Simon Cliffe</div>
+        <div class="contact-role">Founder &amp; CEO</div>
+        <a href="mailto:simon@branchroad.media" class="contact-email">simon@branchroad.media</a>
+      </div>
+
+      <div class="contact-card beat d1">
+        <img src="https://branchroad.media/wp-content/uploads/2023/05/Branch-Road-Nataly.jpg"
+             alt="Nataly Guryanova" class="contact-av"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="contact-init" style="display:none" aria-hidden="true">NG</div>
+        <div class="contact-name">Nataly Guryanova</div>
+        <div class="contact-role">Head of Marketing Operations</div>
+        <a href="mailto:nataly@branchroad.media" class="contact-email">nataly@branchroad.media</a>
+      </div>
+
+      <div class="contact-card beat d2">
+        <img src="https://branchroad.media/wp-content/uploads/2023/05/Branch-Road-Rhys.jpg"
+             alt="Rhys Harker" class="contact-av"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="contact-init" style="display:none" aria-hidden="true">RH</div>
+        <div class="contact-name">Rhys Harker</div>
+        <div class="contact-role">Head of Creative</div>
+        <a href="mailto:rhys@branchroad.media" class="contact-email">rhys@branchroad.media</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bar">
+      <span class="footer-wordmark">Branch Road</span>
+      <span class="footer-tag">branchroad.media · Global storytelling and content for B2B technology brands.</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function() {
+  'use strict';
+
+  // ── Hero stagger on load ──────────────────────────────────────
+  var heroEls = document.querySelectorAll('.hbeat');
+  heroEls.forEach(function(el, i) {
+    setTimeout(function() { el.classList.add('in'); }, 180 + i * 260);
+  });
+
+  // ── Generic beat observer (for .beat, .beat-scale, .beat-left) ──
+  var beatObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        beatObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.beat, .beat-scale, .beat-left').forEach(function(el) {
+    beatObs.observe(el);
+  });
+
+  // ── Foundation items — each fires individually on scroll ──────
+  document.querySelectorAll('.fi').forEach(function(el) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    obs.observe(el);
+  });
+
+  // ── Rec items — each fires individually ───────────────────────
+  document.querySelectorAll('.rec').forEach(function(el) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+    obs.observe(el);
+  });
+
+  // ── Client cards — each fires individually ────────────────────
+  document.querySelectorAll('.client-card').forEach(function(el) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    obs.observe(el);
+  });
+
+  // ── Teal rule expansion ───────────────────────────────────────
+  var tealRule = document.getElementById('teal-rule');
+  if (tealRule) {
+    var ruleObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          tealRule.classList.add('in');
+          ruleObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    ruleObs.observe(tealRule);
+  }
+
+})();
+</script>
+
+</body>
+</html>
